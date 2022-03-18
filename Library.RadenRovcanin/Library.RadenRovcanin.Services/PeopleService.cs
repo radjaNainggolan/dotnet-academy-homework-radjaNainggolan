@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Library.RadenRovcanin.Contracts.Entities;
+using Library.RadenRovcanin.Contracts.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Library.RadenRovcanin.Contracts.Dtos;
-using Library.RadenRovcanin.Contracts.Entities;
 
-namespace Library.RadenRovcanin.Contracts.Services
+
+namespace Library.RadenRovcanin.Services
 {
-    public class PersonService
+    public class PeopleService : IPeopleService
     {
 
         public List<Person> people = new List<Person>
@@ -21,28 +22,28 @@ namespace Library.RadenRovcanin.Contracts.Services
 
         };
 
-        public PersonService() { }
+        public PeopleService() { }
 
-        public List<Person> GetAll() 
+        public List<Person> GetAll()
         {
             return people;
 
         }
 
-        public Person GetById(int Id) 
+        public Person GetById(int Id)
         {
             Person p = people.Find(x => x.Id == Id);
             return p;
-        
+
         }
 
-        public List<Person> GetByCity(string city) 
+        public List<Person> GetByCity(string city)
         {
-            return people.Where(x => x.Adress.City == city).ToList();
-            
+            return people.Where(x => x.Adress.City.Equals(city, StringComparison.CurrentCultureIgnoreCase)).ToList();
+
         }
 
-        public void AddPerson(Person p) 
+        public void AddPerson(Person p)
         {
             people.Add(p);
         }
@@ -50,3 +51,4 @@ namespace Library.RadenRovcanin.Contracts.Services
 
     }
 }
+

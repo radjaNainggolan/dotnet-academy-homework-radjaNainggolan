@@ -2,45 +2,44 @@
 using Microsoft.AspNetCore.Mvc;
 using Library.RadenRovcanin.Contracts.Entities;
 using Library.RadenRovcanin.Contracts.Dtos;
+using Library.RadenRovcanin.Services;
 using Library.RadenRovcanin.Contracts.Services;
+using System.Linq;
 namespace Library.RadenRovcanin.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class PeopleController : ControllerBase
     {
-        
-        PersonService ps = new PersonService();
 
-        public PeopleController() 
+        public IPeopleService ps;
+
+        public PeopleController(IPeopleService PS) 
         {
-            
+            this.ps = PS;  
         }
 
-        [HttpGet("all")]
-        public ActionResult<List<Person>> Get() 
-        {
 
+        [HttpGet("all")]
+        public ActionResult<List<PersonDto>> Get() 
+        {
             try
             {
-                return Ok(ps.GetAll());
+                return Ok(ps.GetAll().Select(p => new PersonDto { Id = p.Id, FirstName = p.FirstName, LastName = p.LastName, Adress = p.Adress }));
             }
             catch (Exception ex) { 
                 return BadRequest(ex.Message);
             }
 
-            
-            
         }
 
 
         [HttpGet]
-        public ActionResult<List<Person>> GetByCity([FromQuery] string city)
+        public ActionResult<List<PersonDto>> GetByCity([FromQuery] string city)
         {
             try
             {
-
-                return Ok(ps.GetByCity(city));
+                return Ok(ps.GetByCity(city).Select(p => new PersonDto {Id = p.Id, FirstName = p.FirstName, LastName = p.LastName, Adress = p.Adress }));
             }
             catch (Exception ex)
             {
@@ -50,26 +49,36 @@ namespace Library.RadenRovcanin.API.Controllers
 
 
         [HttpGet("{Id}")]
-        public ActionResult<Person> GetById([FromRoute] string Id) 
+        public ActionResult<PersonDto> GetById([FromRoute] string Id) 
         {
 
             try
             {   
-                int id = Int32.Parse(Id);
-                Person p = ps.GetById(id);
-                return Ok(p);
+                Person p = ps.GetById(Int32.Parse(Id));
+                PersonDto pdo = new PersonDto 
+                {
+                    Id = p.Id,
+                    FirstName = p.FirstName,
+                    LastName = p.LastName,
+                    Adress = p.Adress
+                };
+
+                return Ok(pdo);
             }
             catch (Exception ex) 
             {
-                return NotFound("Hero not found");
+                return BadRequest();
             }
             
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] PersonDto person) 
+        public ActionResult<List<PersonDto>> Create([FromBody] PersonDto person) 
         {
-            return Ok();
+            Person newPerson = new Person(person.FirstName, person.LastName, person.Adress);
+            ps.AddPerson(newPerson);
+
+            return Ok(ps.GetAll());
         }
 
 

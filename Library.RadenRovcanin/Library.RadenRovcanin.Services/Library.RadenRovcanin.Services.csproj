@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Library.RadenRovcanin.Contracts\Library.RadenRovcanin.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>
