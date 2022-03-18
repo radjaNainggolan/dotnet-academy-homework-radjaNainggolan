@@ -11,11 +11,11 @@ namespace Library.RadenRovcanin.Contracts.Entities
         public int Id { get; set; } = 0;
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public Adress Adress { get; set; }
+        public Adress Adress { get; set; } = default!;
 
 
         public Person( string FirstName, string LastName, Adress adress) {
-            this.Id++;
+            this.Id = this.Id+1;
             this.FirstName = FirstName;
             this.LastName = LastName;
             this.Adress = adress;

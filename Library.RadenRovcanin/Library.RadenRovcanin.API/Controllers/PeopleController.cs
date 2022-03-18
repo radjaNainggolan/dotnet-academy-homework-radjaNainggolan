@@ -2,40 +2,71 @@
 using Microsoft.AspNetCore.Mvc;
 using Library.RadenRovcanin.Contracts.Entities;
 using Library.RadenRovcanin.Contracts.Dtos;
-
+using Library.RadenRovcanin.Contracts.Services;
 namespace Library.RadenRovcanin.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class PeopleController : ControllerBase
     {
+        
+        PersonService ps = new PersonService();
 
-        public PeopleController() {}
+        public PeopleController() 
+        {
+            
+        }
 
-        [HttpGet("/all")]
-        public IActionResult Get() 
-        { 
-              
-            return Ok();
+        [HttpGet("all")]
+        public ActionResult<List<Person>> Get() 
+        {
+
+            try
+            {
+                return Ok(ps.GetAll());
+            }
+            catch (Exception ex) { 
+                return BadRequest(ex.Message);
+            }
+
+            
+            
         }
 
 
         [HttpGet]
-        public IActionResult GetByCity([FromQuery] string city)
+        public ActionResult<List<Person>> GetByCity([FromQuery] string city)
         {
+            try
+            {
 
-            return Ok();
+                return Ok(ps.GetByCity(city));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
 
         [HttpGet("{id}")]
-        public IActionResult GetByID([FromRoute] string personID) 
+        public ActionResult<Person> GetById([FromRoute] string personID) 
         {
-            return Ok();
+
+            try
+            {
+                Person p = ps.GetById(Int32.Parse(personID));
+                return Ok(p);
+            }
+            catch (Exception ex) 
+            {
+                return NotFound(ex);
+            }
+            
         }
 
         [HttpPost]
-        public IActionResult Create(PersonDto person) 
+        public IActionResult Create(PersonDto pd) 
         {
             return Ok();
         }

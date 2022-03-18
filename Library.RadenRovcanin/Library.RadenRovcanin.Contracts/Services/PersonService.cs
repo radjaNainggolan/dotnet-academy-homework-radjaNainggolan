@@ -8,48 +8,20 @@ using Library.RadenRovcanin.Contracts.Entities;
 
 namespace Library.RadenRovcanin.Contracts.Services
 {
-    internal class PersonService
+    public class PersonService
     {
 
-        public List<Person> people = new List<Person> 
-        { 
-            
-            new Person{ 
-                Id = 1,
-                FirstName = "Raden",
-                LastName = "Rovcanin",
-                Adress = new Adress{ 
-                    Street = "Ostroska 7.",
-                    City = "Pljevlja",
-                    Country = "Crna Gora"
-                }
-            },
+        public List<Person> people = new List<Person>
+        {
 
-            new Person{ 
-                Id=2,
-                FirstName = "Rade",
-                LastName = "Vljeic",
-                Adress = new Adress { 
-                    Street = "Blaza Jovanovica 14.",
-                    City = "Spuz",
-                    Country = "Crna Gora"
-                }
-            },
-
-            new Person{
-                Id=3,
-                FirstName = "Damir",
-                LastName = "Delijic",
-                Adress = new Adress {
-                    Street = "Profesorksa 27.",
-                    City = "Podgorica",
-                    Country = "Crna Gora"
-                }
-            }
+            new Person("Raden","Rovcanin",  new Adress{Street = "Ostroska 7.", City = "Pljevlja",Country = "Crna Gora"}),
+            new Person("Damir","Delijic",  new Adress{Street = "Profesorska 17.", City = "Podgorica",Country = "Crna Gora"}),
+            new Person("Rade","Veljic",  new Adress{Street = "Blaza Jovanovica 13.", City = "Spuz",Country = "Crna Gora"})
 
 
         };
 
+        public PersonService() { }
 
         public List<Person> GetAll() 
         {
