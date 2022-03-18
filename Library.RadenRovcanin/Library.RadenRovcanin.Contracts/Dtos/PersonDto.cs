@@ -22,6 +22,17 @@ namespace Library.RadenRovcanin.Contracts.Dtos
         [Required(ErrorMessage = "Adress is required")]
         public Adress Adress { get; set; }
 
+        public PersonDto(int Id, string FirstName, string LastName, Adress adress) 
+        {
+            this.Id = Id;
+            this.FirstName = FirstName;
+            this.LastName = LastName;
+            this.Adress = adress;
+        }
 
+        public static Person toPerson(PersonDto p) {
+
+            return new Person(p.FirstName, p.LastName,p.Adress);
+        }
     }
 }

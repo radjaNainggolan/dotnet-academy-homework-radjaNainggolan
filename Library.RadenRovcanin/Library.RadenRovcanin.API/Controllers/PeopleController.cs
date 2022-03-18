@@ -25,7 +25,7 @@ namespace Library.RadenRovcanin.API.Controllers
         {
             try
             {
-                return Ok(ps.GetAll().Select(p => new PersonDto { Id = p.Id, FirstName = p.FirstName, LastName = p.LastName, Adress = p.Adress }));
+                return Ok(ps.GetAll().Select(p => new PersonDto(p.Id,p.FirstName,p.LastName,p.Adress)));
             }
             catch (Exception ex) { 
                 return BadRequest(ex.Message);
@@ -39,7 +39,7 @@ namespace Library.RadenRovcanin.API.Controllers
         {
             try
             {
-                return Ok(ps.GetByCity(city).Select(p => new PersonDto {Id = p.Id, FirstName = p.FirstName, LastName = p.LastName, Adress = p.Adress }));
+                return Ok(ps.GetByCity(city).Select(p => new PersonDto(p.Id, p.FirstName, p.LastName, p.Adress )));
             }
             catch (Exception ex)
             {
@@ -55,15 +55,8 @@ namespace Library.RadenRovcanin.API.Controllers
             try
             {   
                 Person p = ps.GetById(Int32.Parse(Id));
-                PersonDto pdo = new PersonDto 
-                {
-                    Id = p.Id,
-                    FirstName = p.FirstName,
-                    LastName = p.LastName,
-                    Adress = p.Adress
-                };
-
-                return Ok(pdo);
+                PersonDto pdto = new PersonDto(p.Id, p.FirstName, p.LastName, p.Adress);
+                return Ok(pdto);
             }
             catch (Exception ex) 
             {
@@ -75,7 +68,7 @@ namespace Library.RadenRovcanin.API.Controllers
         [HttpPost]
         public ActionResult<List<PersonDto>> Create([FromBody] PersonDto person) 
         {
-            Person newPerson = new Person(person.FirstName, person.LastName, person.Adress);
+            Person newPerson = PersonDto.toPerson(person);
             ps.AddPerson(newPerson);
 
             return Ok(ps.GetAll());
