@@ -49,24 +49,25 @@ namespace Library.RadenRovcanin.API.Controllers
         }
 
 
-        [HttpGet("{id}")]
-        public ActionResult<Person> GetById([FromRoute] string personID) 
+        [HttpGet("{Id}")]
+        public ActionResult<Person> GetById([FromRoute] string Id) 
         {
 
             try
-            {
-                Person p = ps.GetById(Int32.Parse(personID));
+            {   
+                int id = Int32.Parse(Id);
+                Person p = ps.GetById(id);
                 return Ok(p);
             }
             catch (Exception ex) 
             {
-                return NotFound(ex);
+                return NotFound("Hero not found");
             }
             
         }
 
         [HttpPost]
-        public IActionResult Create(PersonDto pd) 
+        public IActionResult Create([FromBody] PersonDto person) 
         {
             return Ok();
         }

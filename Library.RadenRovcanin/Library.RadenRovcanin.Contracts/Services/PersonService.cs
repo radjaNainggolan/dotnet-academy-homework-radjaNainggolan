@@ -31,7 +31,7 @@ namespace Library.RadenRovcanin.Contracts.Services
 
         public Person GetById(int Id) 
         {
-            Person p = people.Where(p => p.Id == Id).FirstOrDefault();
+            Person p = people.Find(x => x.Id == Id);
             return p;
         
         }
