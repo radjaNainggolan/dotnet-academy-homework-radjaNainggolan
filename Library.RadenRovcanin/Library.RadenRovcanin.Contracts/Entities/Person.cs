@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace Library.RadenRovcanin.Contracts.Entities
 {
-    internal class Person
+    public class Person
     {
-        public int id { get; set; }
-        public string first_name { get; set; }
-        public string last_name { get; set; }
-
-        public Adress adress { get; set; }
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public Adress Adress { get; set; }
 
 
     }

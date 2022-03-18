@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Library.RadenRovcanin.Contracts.Entities
 {
-    internal class Adress
+    public class Adress
     {
-        public string street { get; set; }
-        public string city { get; set; }
-        public string country { get; set; }
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
 
     }
 }
