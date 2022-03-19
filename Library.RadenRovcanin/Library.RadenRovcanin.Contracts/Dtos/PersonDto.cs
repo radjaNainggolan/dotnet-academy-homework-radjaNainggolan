@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Library.RadenRovcanin.Contracts.Entities;
 using System.ComponentModel.DataAnnotations;
-using Library.RadenRovcanin.Contracts.Entities;
 
 namespace Library.RadenRovcanin.Contracts.Dtos
 {
@@ -22,7 +17,7 @@ namespace Library.RadenRovcanin.Contracts.Dtos
         [Required(ErrorMessage = "Adress is required")]
         public Adress Adress { get; set; }
 
-        public PersonDto(int Id, string FirstName, string LastName, Adress adress) 
+        public PersonDto(int Id, string FirstName, string LastName, Adress adress)
         {
             this.Id = Id;
             this.FirstName = FirstName;
@@ -30,9 +25,10 @@ namespace Library.RadenRovcanin.Contracts.Dtos
             this.Adress = adress;
         }
 
-        public static Person toPerson(PersonDto p) {
+        public static Person toPerson(PersonDto p)
+        {
 
-            return new Person(p.FirstName, p.LastName,p.Adress);
+            return new Person(p.FirstName, p.LastName, p.Adress);
         }
     }
 }
