@@ -49,10 +49,10 @@
         [HttpGet("{Id}")]
         public ActionResult<PersonDto> GetById([FromRoute] string id)
         {
-            Person p = this.ps.GetById(Int32.Parse(id));
-
             try
             {
+                Person p = this.ps.GetById(Int32.Parse(id));
+                
                 if (p == null)
                 {
                     return this.NoContent();
