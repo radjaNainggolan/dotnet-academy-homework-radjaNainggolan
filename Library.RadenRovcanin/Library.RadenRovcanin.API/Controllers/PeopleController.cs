@@ -1,10 +1,10 @@
-﻿using Library.RadenRovcanin.Contracts.Dtos;
-using Library.RadenRovcanin.Contracts.Entities;
-using Library.RadenRovcanin.Contracts.Services;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Library.RadenRovcanin.API.Controllers
+﻿namespace Library.RadenRovcanin.API.Controllers
 {
+    using Library.RadenRovcanin.Contracts.Dtos;
+    using Library.RadenRovcanin.Contracts.Entities;
+    using Library.RadenRovcanin.Contracts.Services;
+    using Microsoft.AspNetCore.Mvc;
+
     [Route("api/[controller]")]
     [ApiController]
     public class PeopleController : ControllerBase
