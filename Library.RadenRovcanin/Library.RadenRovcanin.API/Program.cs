@@ -2,7 +2,6 @@ using Library.RadenRovcanin.API.CustomMiddleware;
 using Library.RadenRovcanin.Contracts.Services;
 using Library.RadenRovcanin.Services;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -22,15 +21,14 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-   
 }
-
-app.UseCustomMiddleware();
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCustomMiddleware();
 
 app.Run();

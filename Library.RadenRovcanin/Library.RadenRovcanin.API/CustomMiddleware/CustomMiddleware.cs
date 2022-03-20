@@ -1,31 +1,35 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Logging;
+using System.Text;
 
 namespace Library.RadenRovcanin.API.CustomMiddleware
 {
     // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
+
     public class CustomMiddleware
     {
-        private readonly RequestDelegate _next;
-        private readonly ILogger _logger;
-
+        private readonly RequestDelegate next;
+        private readonly ILogger logger;
         public CustomMiddleware(RequestDelegate next, ILoggerFactory log)
         {
-            _next = next;
-            _logger = log.CreateLogger("Request header middleware");
+            this.next = next;
+            this.logger = log.CreateLogger("Request header middleware");
         }
 
         public async Task Invoke(HttpContext httpContext)
         {
-           
-            _logger.LogInformation(httpContext.Request.Headers.ToString());
+            var builder = new StringBuilder(Environment.NewLine);
+            
+            foreach (var header in httpContext.Request.Headers)
+            {
+                builder.AppendLine($"{header.Key} : {header.Value}");
+            }
 
-            await _next(httpContext);
+            this.logger.LogInformation(builder.ToString());
+
+            await this.next(httpContext);
         }
     }
 
-    // Extension method used to add the middleware to the HTTP request pipeline.
     public static class CustomMiddlewareExtensions
     {
         public static IApplicationBuilder UseCustomMiddleware(this IApplicationBuilder builder)
