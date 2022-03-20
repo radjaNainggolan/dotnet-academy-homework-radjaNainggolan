@@ -1,9 +1,8 @@
-﻿using Library.RadenRovcanin.Contracts.Entities;
-using Library.RadenRovcanin.Contracts.Services;
-
-
-namespace Library.RadenRovcanin.Services
+﻿namespace Library.RadenRovcanin.Services
 {
+    using Library.RadenRovcanin.Contracts.Entities;
+    using Library.RadenRovcanin.Contracts.Services;
+
     public class PeopleService : IPeopleService
     {
 

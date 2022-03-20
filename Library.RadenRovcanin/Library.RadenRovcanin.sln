@@ -5,9 +5,9 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.RadenRovcanin.API", "Library.RadenRovcanin.API\Library.RadenRovcanin.API.csproj", "{E4C28A46-1AF1-47AD-B59A-009852EAFD52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.RadenRovcanin.Contracts", "Library.RadenRovcanin.Contracts\Library.RadenRovcanin.Contracts.csproj", "{E583B773-4E5F-410D-B6DD-47BD396B721E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.RadenRovcanin.Contracts", "Library.RadenRovcanin.Contracts\Library.RadenRovcanin.Contracts.csproj", "{E583B773-4E5F-410D-B6DD-47BD396B721E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.RadenRovcanin.Services", "Library.RadenRovcanin.Services\Library.RadenRovcanin.Services.csproj", "{0C3F2D91-4436-44E1-BB1A-A69DF57960BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.RadenRovcanin.Services", "Library.RadenRovcanin.Services\Library.RadenRovcanin.Services.csproj", "{0C3F2D91-4436-44E1-BB1A-A69DF57960BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

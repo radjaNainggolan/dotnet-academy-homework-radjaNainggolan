@@ -1,8 +1,9 @@
-﻿using Library.RadenRovcanin.Contracts.Entities;
-using System.ComponentModel.DataAnnotations;
-
+﻿
 namespace Library.RadenRovcanin.Contracts.Dtos
 {
+    using Library.RadenRovcanin.Contracts.Entities;
+    using System.ComponentModel.DataAnnotations;
+    
     public class PersonDto
     {
         public int Id { get; set; }
@@ -25,7 +26,7 @@ namespace Library.RadenRovcanin.Contracts.Dtos
             this.Adress = adress;
         }
 
-        public static Person toPerson(PersonDto p)
+        public static Person ToPerson(PersonDto p)
         {
 
             return new Person(p.FirstName, p.LastName, p.Adress);
