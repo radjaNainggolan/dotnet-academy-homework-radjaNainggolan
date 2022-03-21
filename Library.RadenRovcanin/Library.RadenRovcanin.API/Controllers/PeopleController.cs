@@ -65,17 +65,17 @@
             }
             catch (Exception ex)
             {
-                return this.BadRequest(ex.Message);
+                return this.BadRequest();
             }
         }
 
         [HttpPost]
-        public ActionResult<PersonDto> Create([FromBody] PersonDto person)
+        public ActionResult<Person> Create([FromBody] PersonDto person)
         {
             Person newPerson = PersonDto.ToPerson(person);
             this.ps.AddPerson(newPerson);
 
-            return this.Created(string.Empty, person);
+            return this.Created(string.Empty, newPerson);
         }
     }
 }
