@@ -1,4 +1,4 @@
-﻿namespace Library.RadenRovcanin.API.CustomMiddleware
+namespace Library.RadenRovcanin.API.CustomMiddleware
 {
     using System.Text;
     using Microsoft.Extensions.Logging;
@@ -7,7 +7,7 @@
     {
         private readonly RequestDelegate next;
         private readonly ILogger logger;
-        
+
         public CustomMiddleware(RequestDelegate next, ILoggerFactory log)
         {
             this.next = next;
@@ -25,14 +25,6 @@
             this.logger.LogInformation(builder.ToString());
 
             await this.next(httpContext);
-        }
-    }
-
-    public static class CustomMiddlewareExtensions
-    {
-        public static IApplicationBuilder UseCustomMiddleware(this IApplicationBuilder builder)
-        {
-            return builder.UseMiddleware<CustomMiddleware>();
         }
     }
 }

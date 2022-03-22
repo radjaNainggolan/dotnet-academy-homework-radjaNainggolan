@@ -1,4 +1,4 @@
-﻿using Library.RadenRovcanin.Contracts.Entities;
+using Library.RadenRovcanin.Contracts.Entities;
 using Library.RadenRovcanin.Contracts.Services;
 
 namespace Library.RadenRovcanin.Services
@@ -11,8 +11,6 @@ namespace Library.RadenRovcanin.Services
             new Person("Damir", "Delijic",  new Adress { Street = "Profesorska 17.", City = "Podgorica", Country = "Crna Gora" }),
             new Person("Rade", "Veljic",  new Adress { Street = "Blaza Jovanovica 13.", City = "Spuz", Country = "Crna Gora" }),
         };
-
-        public PeopleService() { }
 
         public List<Person> GetAll()
         {

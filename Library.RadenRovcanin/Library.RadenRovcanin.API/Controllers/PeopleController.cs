@@ -1,4 +1,4 @@
-﻿namespace Library.RadenRovcanin.API.Controllers
+namespace Library.RadenRovcanin.API.Controllers
 {
     using Library.RadenRovcanin.Contracts.Dtos;
     using Library.RadenRovcanin.Contracts.Entities;
@@ -51,8 +51,7 @@
         {
             try
             {
-                Person p = this.ps.GetById(Int32.Parse(id));
-                
+                Person p = this.ps.GetById(int.Parse(id));
                 if (p == null)
                 {
                     return this.NoContent();
@@ -65,7 +64,7 @@
             }
             catch (Exception ex)
             {
-                return this.BadRequest();
+                return this.BadRequest(ex.Message);
             }
         }
 

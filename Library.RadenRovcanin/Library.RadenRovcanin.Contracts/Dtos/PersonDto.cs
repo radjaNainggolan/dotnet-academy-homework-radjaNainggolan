@@ -1,8 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Library.RadenRovcanin.Contracts.Entities;
-
 namespace Library.RadenRovcanin.Contracts.Dtos
 {
+    using System.ComponentModel.DataAnnotations;
+    using Library.RadenRovcanin.Contracts.Entities;
     public class PersonDto
     {
         public int Id { get; set; }

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Library.RadenRovcanin.Contracts.Dtos;
-using Library.RadenRovcanin.Contracts.Entities;
-
 namespace Library.RadenRovcanin.Contracts.Services
 {
+    using System.Collections.Generic;
+    using Library.RadenRovcanin.Contracts.Entities;
+
     public interface IPeopleService
     {
         public List<Person> GetAll();
