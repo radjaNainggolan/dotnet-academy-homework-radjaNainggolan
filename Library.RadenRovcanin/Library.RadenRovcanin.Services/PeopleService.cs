@@ -17,9 +17,9 @@ namespace Library.RadenRovcanin.Services
             return this.people;
         }
 
-        public Person GetById(int Id)
+        public Person GetById(int id)
         {
-            Person p = this.people.Find(x => x.Id == Id);
+            Person? p = this.people.Find(x => x.Id == id);
             return p;
         }
 

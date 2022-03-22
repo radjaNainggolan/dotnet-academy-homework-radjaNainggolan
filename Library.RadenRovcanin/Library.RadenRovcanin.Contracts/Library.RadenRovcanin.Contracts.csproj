@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <AdditionalFiles Remove="C:\Users\Legion\Desktop\workspace\dotnet-academy-homework-radjaNainggolan\Library.RadenRovcanin\stylecop.json" />
+  </ItemGroup>
+
 </Project>
