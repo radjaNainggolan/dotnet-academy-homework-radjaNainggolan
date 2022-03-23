@@ -12,7 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IPeopleService, PeopleService>();
+builder.Services.AddSingleton<IPeopleService, PeopleService>();
 
 var app = builder.Build();
 

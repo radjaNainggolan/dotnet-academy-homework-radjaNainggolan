@@ -1,14 +1,13 @@
+﻿using System.Text;
+
 namespace Library.RadenRovcanin.API.CustomMiddleware
 {
-    using System.Text;
-    using Microsoft.Extensions.Logging;
-
-    public class CustomMiddleware
+    public class UserAgnetRequestHeaderLoggMiddleware
     {
         private readonly RequestDelegate next;
         private readonly ILogger logger;
 
-        public CustomMiddleware(RequestDelegate next, ILoggerFactory log)
+        public UserAgnetRequestHeaderLoggMiddleware(RequestDelegate next, ILoggerFactory log)
         {
             this.next = next;
             this.logger = log.CreateLogger("Request header middleware");
@@ -17,12 +16,13 @@ namespace Library.RadenRovcanin.API.CustomMiddleware
         public async Task Invoke(HttpContext httpContext)
         {
             var builder = new StringBuilder(Environment.NewLine);
-            foreach (var header in httpContext.Request.Headers)
+            var headers = httpContext.Request.Headers.UserAgent;
+            foreach (var header in headers)
             {
-                builder.AppendLine($"{header.Key} : {header.Value}");
+                builder.Append(header);
             }
 
-            this.logger.LogInformation(builder.ToString());
+            logger.LogInformation(message: builder.ToString());
 
             await this.next(httpContext);
         }
