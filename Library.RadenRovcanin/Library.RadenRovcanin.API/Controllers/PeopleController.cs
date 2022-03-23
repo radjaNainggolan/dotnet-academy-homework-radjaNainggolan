@@ -18,44 +18,21 @@ namespace Library.RadenRovcanin.API.Controllers
         public ActionResult<List<PersonDto>> Get()
         {
             List<PersonDto>? list = peopleService.GetAll();
-
-            try
-            {
-                return Ok(list);
-            }
-            catch (Exception)
-            {
-                return NoContent();
-            }
+            return Ok(list);
         }
 
         [HttpGet]
         public ActionResult<List<PersonDto>> GetByCity([FromQuery] string city)
         {
             List<PersonDto>? list = peopleService.GetByCity(city);
-            try
-            {
-                return Ok(list);
-            }
-            catch (Exception)
-            {
-                return NoContent();
-            }
+            return Ok(list);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<PersonDto> GetById([FromRoute] string id)
+        public ActionResult<PersonDto> GetById([FromRoute] int id)
         {
-            PersonDto? personDto = peopleService.GetById(int.Parse(id));
-
-            try
-            {
-                return Ok(personDto);
-            }
-            catch (Exception)
-            {
-                return NoContent();
-            }
+            PersonDto? personDto = peopleService.GetById(id);
+            return Ok(personDto);
         }
 
         [HttpPost]

@@ -6,37 +6,67 @@ namespace Library.RadenRovcanin.Services
 {
     public class PeopleService : IPeopleService
     {
+        private static int autoId = 0;
+
         private readonly List<Person> people = new()
         {
-            new Person("Raden", "Rovcanin", new Adress { Street = "Ostroska 7.", City = "Pljevlja", Country = "Crna Gora" }),
-            new Person("Damir", "Delijic", new Adress { Street = "Profesorska 17.", City = "Podgorica", Country = "Crna Gora" }),
-            new Person("Rade", "Veljic", new Adress { Street = "Blaza Jovanovica 13.", City = "Spuz", Country = "Crna Gora" }),
+            new Person(autoId++, "Raden", "Rovcanin", new Address("Ostroska 7.", "Pljevlja", "Crna Gora")),
+            new Person(autoId++, "Damir", "Delijic", new Address("Profesorska 17.", "Podgorica", "Crna Gora")),
+            new Person(autoId++, "Rade", "Veljic", new Address("Blaza Jovanovica 13.", "Spuz", "Crna Gora")),
         };
 
         public List<PersonDto>? GetAll()
         {
-            return people.Count > 0 ? people.ConvertAll(p => new PersonDto(p.Id, p.FirstName, p.LastName, p.Adress)) : null;
+            return people.ConvertAll(p => new PersonDto(
+                p.Id,
+                p.FirstName,
+                p.LastName,
+                new AddressDto(
+                    p.Address.Street,
+                    p.Address.City,
+                    p.Address.Country)));
         }
 
         public PersonDto? GetById(int id)
         {
-            PersonDto? personDto = people.Where(x => x.Id == id)
-                .Select(x => new PersonDto(x.Id, x.FirstName, x.LastName, x.Adress))
+            PersonDto? personDto = people
+                .Where(x => x.Id == id)
+                .Select(x => new PersonDto(
+                    x.Id,
+                    x.FirstName,
+                    x.LastName,
+                    new AddressDto(
+                        x.Address.Street,
+                        x.Address.City,
+                        x.Address.Country)))
                 .FirstOrDefault();
 
-            return personDto ?? null;
+            return personDto;
         }
 
         public List<PersonDto>? GetByCity(string city)
         {
-            List<PersonDto> list = people.Where(x => x.Adress.City.Equals(city, StringComparison.CurrentCultureIgnoreCase))
-                .Select(x => new PersonDto(x.Id, x.FirstName, x.LastName, x.Adress)).ToList();
-            return list.Count > 0 ? list : null;
+            List<PersonDto> list = people
+                .Where(x => x.Address.City.Equals(city, StringComparison.CurrentCultureIgnoreCase))
+                .Select(x => new PersonDto(
+                    x.Id,
+                    x.FirstName,
+                    x.LastName,
+                    new AddressDto(x.Address.Street, x.Address.City, x.Address.Country)))
+                .ToList();
+            return list;
         }
 
         public void AddPerson(PersonDto personDto)
         {
-            people.Add(PersonDto.ToPerson(personDto));
+            people.Add(new Person(
+                autoId++,
+                personDto.FirstName,
+                personDto.LastName,
+                new Address(
+                    personDto.AddressDto.Street,
+                    personDto.AddressDto.City,
+                    personDto.AddressDto.Country)));
         }
     }
 }

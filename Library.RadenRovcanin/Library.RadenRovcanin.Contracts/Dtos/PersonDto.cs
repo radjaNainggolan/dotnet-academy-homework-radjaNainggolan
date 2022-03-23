@@ -1,31 +1,25 @@
 using System.ComponentModel.DataAnnotations;
-using Library.RadenRovcanin.Contracts.Entities;
 namespace Library.RadenRovcanin.Contracts.Dtos
 {
     public class PersonDto
     {
-        public int Id { get; set; }
+        public int Id { get; set; } = default!;
 
         [Required(ErrorMessage = "FirstName is required")]
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = default!;
 
         [Required(ErrorMessage = "LastName is required")]
-        public string LastName { get; set; }
+        public string LastName { get; set; } = default!;
 
-        [Required(ErrorMessage = "Adress is required")]
-        public Adress Adress { get; set; }
+        [Required(ErrorMessage = "Address is required")]
+        public AddressDto AddressDto { get; set; } = default!;
 
-        public PersonDto(int id, string firstName, string lastName, Adress adress)
+        public PersonDto(int id, string firstName, string lastName, AddressDto address)
         {
-            this.Id = id;
-            this.FirstName = firstName;
-            this.LastName = lastName;
-            this.Adress = adress;
-        }
-
-        public static Person ToPerson(PersonDto p)
-        {
-            return new Person(p.FirstName, p.LastName, p.Adress);
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            AddressDto = address;
         }
     }
 }

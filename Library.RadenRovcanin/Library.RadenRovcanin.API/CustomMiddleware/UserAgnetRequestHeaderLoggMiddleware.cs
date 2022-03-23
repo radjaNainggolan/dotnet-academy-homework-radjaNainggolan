@@ -1,4 +1,4 @@
-﻿using System.Text;
+using Microsoft.Extensions.Primitives;
 
 namespace Library.RadenRovcanin.API.CustomMiddleware
 {
@@ -15,14 +15,9 @@ namespace Library.RadenRovcanin.API.CustomMiddleware
 
         public async Task Invoke(HttpContext httpContext)
         {
-            var builder = new StringBuilder(Environment.NewLine);
-            var headers = httpContext.Request.Headers.UserAgent;
-            foreach (var header in headers)
-            {
-                builder.Append(header);
-            }
-
-            logger.LogInformation(message: builder.ToString());
+            StringValues headers = httpContext.Request.Headers.UserAgent;
+            string message = $"Logging header {headers.First()}";
+            logger.LogInformation(message: message);
 
             await this.next(httpContext);
         }
