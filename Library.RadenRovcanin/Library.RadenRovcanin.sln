@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.RadenRovcanin.Contr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.RadenRovcanin.Services", "Library.RadenRovcanin.Services\Library.RadenRovcanin.Services.csproj", "{0C3F2D91-4436-44E1-BB1A-A69DF57960BC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.RadneRovcanin.Data.Db", "Library.RadneRovcanin.Data.Db\Library.RadneRovcanin.Data.Db.csproj", "{A6CE5847-6CD9-4E27-BB20-747430068A13}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{0C3F2D91-4436-44E1-BB1A-A69DF57960BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C3F2D91-4436-44E1-BB1A-A69DF57960BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C3F2D91-4436-44E1-BB1A-A69DF57960BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6CE5847-6CD9-4E27-BB20-747430068A13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6CE5847-6CD9-4E27-BB20-747430068A13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6CE5847-6CD9-4E27-BB20-747430068A13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6CE5847-6CD9-4E27-BB20-747430068A13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

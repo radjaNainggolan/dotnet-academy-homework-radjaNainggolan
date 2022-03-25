@@ -47,7 +47,8 @@ namespace Library.RadenRovcanin.Services
         public List<PersonDto> GetByCity(string city)
         {
             List<PersonDto> list = people
-                .Where(x => x.Address.City.Equals(city, StringComparison.CurrentCultureIgnoreCase))
+                .Where(x => x.Address.City
+                .Equals(city, StringComparison.CurrentCultureIgnoreCase))
                 .Select(x => new PersonDto(
                     x.Id,
                     x.FirstName,
