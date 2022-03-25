@@ -39,7 +39,7 @@ namespace Library.RadenRovcanin.API.Controllers
         public ActionResult<PersonDto> Create([FromBody] PersonDto person)
         {
             peopleService.AddPerson(person);
-            return this.Created(string.Empty, person);
+            return this.Created("Person is successfully created", null);
         }
     }
 }
