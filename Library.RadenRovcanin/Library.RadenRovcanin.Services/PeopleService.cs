@@ -64,9 +64,9 @@ namespace Library.RadenRovcanin.Services
                 personDto.FirstName,
                 personDto.LastName,
                 new Address(
-                    personDto.AddressDto.Street,
-                    personDto.AddressDto.City,
-                    personDto.AddressDto.Country)));
+                    personDto.Address.Street,
+                    personDto.Address.City,
+                    personDto.Address.Country)));
         }
     }
 }
