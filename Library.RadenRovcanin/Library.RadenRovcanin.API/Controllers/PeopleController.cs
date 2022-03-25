@@ -15,28 +15,28 @@ namespace Library.RadenRovcanin.API.Controllers
         }
 
         [HttpGet("all")]
-        public ActionResult<List<PersonDto>> Get()
+        public ActionResult<List<PersonDtoResponse>> Get()
         {
-            List<PersonDto> list = peopleService.GetAll();
+            List<PersonDtoResponse> list = peopleService.GetAll();
             return Ok(list);
         }
 
         [HttpGet]
-        public ActionResult<List<PersonDto>> GetByCity([FromQuery] string city)
+        public ActionResult<List<PersonDtoResponse>> GetByCity([FromQuery] string city)
         {
-            List<PersonDto> list = peopleService.GetByCity(city);
+            List<PersonDtoResponse> list = peopleService.GetByCity(city);
             return Ok(list);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<PersonDto> GetById([FromRoute] int id)
+        public ActionResult<PersonDtoResponse> GetById([FromRoute] int id)
         {
-            PersonDto? personDto = peopleService.GetById(id);
-            return Ok(personDto);
+            PersonDtoResponse? personDtoResponse = peopleService.GetById(id);
+            return Ok(personDtoResponse);
         }
 
         [HttpPost]
-        public ActionResult<PersonDto> Create([FromBody] PersonDto person)
+        public ActionResult<PersonDtoRequest> Create([FromBody] PersonDtoRequest person)
         {
             peopleService.AddPerson(person);
             return this.Created("Person is successfully created", null);

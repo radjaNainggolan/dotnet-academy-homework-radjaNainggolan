@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 namespace Library.RadenRovcanin.Contracts.Dtos
 {
-    public class PersonDto
+    public class PersonDtoResponse
     {
         public int Id { get; set; } = default!;
 
@@ -14,7 +14,7 @@ namespace Library.RadenRovcanin.Contracts.Dtos
         [Required(ErrorMessage = "Address is required")]
         public AddressDto Address { get; set; } = default!;
 
-        public PersonDto(int id, string firstName, string lastName, AddressDto address)
+        public PersonDtoResponse(int id, string firstName, string lastName, AddressDto address)
         {
             Id = id;
             FirstName = firstName;

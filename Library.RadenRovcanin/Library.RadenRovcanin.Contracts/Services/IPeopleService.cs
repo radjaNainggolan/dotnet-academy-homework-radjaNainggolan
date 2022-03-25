@@ -3,12 +3,12 @@ namespace Library.RadenRovcanin.Contracts.Services
 {
     public interface IPeopleService
     {
-        public List<PersonDto> GetAll();
+        public List<PersonDtoResponse> GetAll();
 
-        public PersonDto? GetById(int id);
+        public PersonDtoResponse? GetById(int id);
 
-        public List<PersonDto> GetByCity(string city);
+        public List<PersonDtoResponse> GetByCity(string city);
 
-        public void AddPerson(PersonDto p);
+        public void AddPerson(PersonDtoRequest p);
     }
 }

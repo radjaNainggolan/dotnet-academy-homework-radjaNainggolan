@@ -15,9 +15,9 @@ namespace Library.RadenRovcanin.Services
             new Person(autoId++, "Rade", "Veljic", new Address("Blaza Jovanovica 13.", "Spuz", "Crna Gora")),
         };
 
-        public List<PersonDto> GetAll()
+        public List<PersonDtoResponse> GetAll()
         {
-            return people.ConvertAll(p => new PersonDto(
+            return people.ConvertAll(p => new PersonDtoResponse(
                 p.Id,
                 p.FirstName,
                 p.LastName,
@@ -27,11 +27,11 @@ namespace Library.RadenRovcanin.Services
                     p.Address.Country)));
         }
 
-        public PersonDto? GetById(int id)
+        public PersonDtoResponse? GetById(int id)
         {
-            PersonDto? personDto = people
+            PersonDtoResponse? personDto = people
                 .Where(x => x.Id == id)
-                .Select(x => new PersonDto(
+                .Select(x => new PersonDtoResponse(
                     x.Id,
                     x.FirstName,
                     x.LastName,
@@ -44,12 +44,12 @@ namespace Library.RadenRovcanin.Services
             return personDto;
         }
 
-        public List<PersonDto> GetByCity(string city)
+        public List<PersonDtoResponse> GetByCity(string city)
         {
-            List<PersonDto> list = people
+            List<PersonDtoResponse> list = people
                 .Where(x => x.Address.City
                 .Equals(city, StringComparison.CurrentCultureIgnoreCase))
-                .Select(x => new PersonDto(
+                .Select(x => new PersonDtoResponse(
                     x.Id,
                     x.FirstName,
                     x.LastName,
@@ -58,7 +58,7 @@ namespace Library.RadenRovcanin.Services
             return list;
         }
 
-        public void AddPerson(PersonDto personDto)
+        public void AddPerson(PersonDtoRequest personDto)
         {
             people.Add(new Person(
                 autoId++,

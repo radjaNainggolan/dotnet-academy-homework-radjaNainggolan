@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Library.RadenRovcanin.Contracts\Library.RadenRovcanin.Contracts.csproj" />
     <ProjectReference Include="..\Library.RadenRovcanin.Services\Library.RadenRovcanin.Services.csproj" />
+    <ProjectReference Include="..\Library.RadneRovcanin.Data.Db\Library.RadenRovcanin.Data.Db.csproj" />
   </ItemGroup>
 
 </Project>
