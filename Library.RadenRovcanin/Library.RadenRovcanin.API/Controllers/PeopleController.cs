@@ -17,14 +17,14 @@ namespace Library.RadenRovcanin.API.Controllers
         [HttpGet("all")]
         public ActionResult<List<PersonDto>> Get()
         {
-            List<PersonDto>? list = peopleService.GetAll();
+            List<PersonDto> list = peopleService.GetAll();
             return Ok(list);
         }
 
         [HttpGet]
         public ActionResult<List<PersonDto>> GetByCity([FromQuery] string city)
         {
-            List<PersonDto>? list = peopleService.GetByCity(city);
+            List<PersonDto> list = peopleService.GetByCity(city);
             return Ok(list);
         }
 

@@ -15,7 +15,7 @@ namespace Library.RadenRovcanin.Services
             new Person(autoId++, "Rade", "Veljic", new Address("Blaza Jovanovica 13.", "Spuz", "Crna Gora")),
         };
 
-        public List<PersonDto>? GetAll()
+        public List<PersonDto> GetAll()
         {
             return people.ConvertAll(p => new PersonDto(
                 p.Id,
@@ -44,7 +44,7 @@ namespace Library.RadenRovcanin.Services
             return personDto;
         }
 
-        public List<PersonDto>? GetByCity(string city)
+        public List<PersonDto> GetByCity(string city)
         {
             List<PersonDto> list = people
                 .Where(x => x.Address.City.Equals(city, StringComparison.CurrentCultureIgnoreCase))
