@@ -13,6 +13,10 @@ namespace Library.RadenRovcanin.Contracts.Dtos
         [Required(ErrorMessage = "Country is required")]
         public string Country { get; set; } = default!;
 
+        public AddressDto()
+        {
+        }
+
         public AddressDto(string street, string city, string country)
         {
             Street = street;

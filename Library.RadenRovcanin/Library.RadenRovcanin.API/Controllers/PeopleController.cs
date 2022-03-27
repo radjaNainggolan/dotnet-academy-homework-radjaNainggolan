@@ -1,5 +1,6 @@
 using Library.RadenRovcanin.Contracts.Dtos;
 using Library.RadenRovcanin.Contracts.Services;
+using Library.RadenRovcanin.Services;
 using Microsoft.AspNetCore.Mvc;
 namespace Library.RadenRovcanin.API.Controllers
 {
@@ -17,21 +18,21 @@ namespace Library.RadenRovcanin.API.Controllers
         [HttpGet("all")]
         public ActionResult<List<PersonDtoResponse>> Get()
         {
-            List<PersonDtoResponse> list = peopleService.GetAll();
+            var list = peopleService.GetAll();
             return Ok(list);
         }
 
         [HttpGet]
         public ActionResult<List<PersonDtoResponse>> GetByCity([FromQuery] string city)
         {
-            List<PersonDtoResponse> list = peopleService.GetByCity(city);
+            var list = peopleService.GetByCity(city);
             return Ok(list);
         }
 
         [HttpGet("{id}")]
         public ActionResult<PersonDtoResponse> GetById([FromRoute] int id)
         {
-            PersonDtoResponse? personDtoResponse = peopleService.GetById(id);
+            var personDtoResponse =  peopleService.GetById(id);
             return Ok(personDtoResponse);
         }
 

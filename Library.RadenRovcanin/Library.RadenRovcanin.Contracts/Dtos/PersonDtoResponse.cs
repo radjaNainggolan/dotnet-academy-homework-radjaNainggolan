@@ -14,6 +14,10 @@ namespace Library.RadenRovcanin.Contracts.Dtos
         [Required(ErrorMessage = "Address is required")]
         public AddressDto Address { get; set; } = default!;
 
+        public PersonDtoResponse()
+        {
+        }
+
         public PersonDtoResponse(int id, string firstName, string lastName, AddressDto address)
         {
             Id = id;

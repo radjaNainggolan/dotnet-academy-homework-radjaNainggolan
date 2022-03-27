@@ -1,6 +1,9 @@
+using System;
 using Library.RadenRovcanin.Contracts.Dtos;
 using Library.RadenRovcanin.Contracts.Entities;
+using Library.RadenRovcanin.Contracts.Repositories;
 using Library.RadenRovcanin.Contracts.Services;
+using Library.RadenRovcanin.Data.Db.Repositories;
 
 namespace Library.RadenRovcanin.Services
 {
@@ -8,16 +11,17 @@ namespace Library.RadenRovcanin.Services
     {
         private static int autoId = 0;
 
-        private readonly List<Person> people = new()
+        private IUnitOfWork _iuow;
+        public PeopleService(IUnitOfWork iuow)
         {
-            new Person(autoId++, "Raden", "Rovcanin", new Address("Ostroska 7.", "Pljevlja", "Crna Gora")),
-            new Person(autoId++, "Damir", "Delijic", new Address("Profesorska 17.", "Podgorica", "Crna Gora")),
-            new Person(autoId++, "Rade", "Veljic", new Address("Blaza Jovanovica 13.", "Spuz", "Crna Gora")),
-        };
+            _iuow = iuow;
+        }
 
-        public List<PersonDtoResponse> GetAll()
+        public async Task<IEnumerable<PersonDtoResponse>> GetAll()
         {
-            return people.ConvertAll(p => new PersonDtoResponse(
+            var res = await _iuow.People.GetAllAsync();
+
+            var l = res.Select(p => new PersonDtoResponse(
                 p.Id,
                 p.FirstName,
                 p.LastName,
@@ -25,49 +29,49 @@ namespace Library.RadenRovcanin.Services
                     p.Address.Street,
                     p.Address.City,
                     p.Address.Country)));
+
+            return l;
         }
 
-        public PersonDtoResponse? GetById(int id)
+        public async Task<PersonDtoResponse?> GetById(int id)
         {
-            PersonDtoResponse? personDto = people
-                .Where(x => x.Id == id)
-                .Select(x => new PersonDtoResponse(
-                    x.Id,
-                    x.FirstName,
-                    x.LastName,
-                    new AddressDto(
-                        x.Address.Street,
-                        x.Address.City,
-                        x.Address.Country)))
-                .FirstOrDefault();
-
-            return personDto;
+            var res = await _iuow.People.GetByIdAsync(id);
+            return new PersonDtoResponse(
+                res.Id,
+                res.FirstName,
+                res.LastName,
+                new AddressDto(
+                    res.Address.Street,
+                    res.Address.City,
+                    res.Address.Country));
         }
 
-        public List<PersonDtoResponse> GetByCity(string city)
+        public async Task<IEnumerable<PersonDtoResponse>> GetByCity(string city)
         {
-            List<PersonDtoResponse> list = people
-                .Where(x => x.Address.City
-                .Equals(city, StringComparison.CurrentCultureIgnoreCase))
-                .Select(x => new PersonDtoResponse(
-                    x.Id,
-                    x.FirstName,
-                    x.LastName,
-                    new AddressDto(x.Address.Street, x.Address.City, x.Address.Country)))
-                .ToList();
-            return list;
+            //var res = await _iuow.People.GetByCityAsync(city);
+            //return res.Select(p => new PersonDtoResponse(
+            //    p.Id,
+            //    p.FirstName,
+            //    p.LastName,
+            //    new AddressDto(
+            //        p.Address.Street,
+            //        p.Address.City,
+            //        p.Address.Country)));
+
+            throw new NotImplementedException();
         }
 
         public void AddPerson(PersonDtoRequest personDto)
         {
-            people.Add(new Person(
+            Person p = new Person(
                 autoId++,
                 personDto.FirstName,
                 personDto.LastName,
                 new Address(
                     personDto.Address.Street,
                     personDto.Address.City,
-                    personDto.Address.Country)));
+                    personDto.Address.Country));
+            _iuow.People.Add(p);
         }
     }
 }

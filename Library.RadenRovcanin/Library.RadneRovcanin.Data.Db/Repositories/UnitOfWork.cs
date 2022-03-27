@@ -1,3 +1,4 @@
+using Library.RadenRovcanin.Contracts.Entities;
 using Library.RadenRovcanin.Contracts.Repositories;
 using Library.RadneRovcanin.Data.Db.Configurations;
 using Microsoft.EntityFrameworkCore;
@@ -6,7 +7,7 @@ namespace Library.RadenRovcanin.Data.Db.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly IPersonRepository people;
+        private readonly IRepository<Person> people;
         private readonly DbContext _dbContext;
 
         public UnitOfWork(ApplicationDbContext context)
@@ -14,8 +15,8 @@ namespace Library.RadenRovcanin.Data.Db.Repositories
             _dbContext = context;
         }
 
-        public IPersonRepository People
-            => people ?? new PersonRepository(_dbContext);
+        public IRepository<Person> People
+            => people ?? new Repository<Person>(_dbContext);
 
         public async Task SaveChangesAsync()
         {

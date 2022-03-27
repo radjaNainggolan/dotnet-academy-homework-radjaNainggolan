@@ -4,6 +4,6 @@ namespace Library.RadenRovcanin.Contracts.Repositories
 {
     public interface IPersonRepository : IRepository<Person>
     {
-        Task<ICollection<Person>> GetByCityAsync(string city);
+        Task<IList<Person>> GetByCityAsync(string city);
     }
 }
