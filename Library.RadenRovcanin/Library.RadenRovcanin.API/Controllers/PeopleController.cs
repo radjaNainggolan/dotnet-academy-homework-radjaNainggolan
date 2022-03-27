@@ -16,23 +16,23 @@ namespace Library.RadenRovcanin.API.Controllers
         }
 
         [HttpGet("all")]
-        public ActionResult<List<PersonDtoResponse>> Get()
+        public async Task<ActionResult<IList<PersonDtoResponse>>> Get()
         {
-            var list = peopleService.GetAll();
+            var list = await peopleService.GetAll();
             return Ok(list);
         }
 
         [HttpGet]
-        public ActionResult<List<PersonDtoResponse>> GetByCity([FromQuery] string city)
+        public async Task<ActionResult<IList<PersonDtoResponse>>> GetByCity([FromQuery] string city)
         {
-            var list = peopleService.GetByCity(city);
+            var list = await peopleService.GetByCity(city);
             return Ok(list);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<PersonDtoResponse> GetById([FromRoute] int id)
+        public async Task<ActionResult<PersonDtoResponse>> GetById([FromRoute] int id)
         {
-            var personDtoResponse =  peopleService.GetById(id);
+            var personDtoResponse = await peopleService.GetById(id);
             return Ok(personDtoResponse);
         }
 

@@ -17,7 +17,6 @@ namespace Library.RadenRovcanin.Data.Db.Repositories
 
         public IRepository<Person> People
             => people ?? new Repository<Person>(_dbContext);
-
         public async Task SaveChangesAsync()
         {
             await _dbContext.SaveChangesAsync();

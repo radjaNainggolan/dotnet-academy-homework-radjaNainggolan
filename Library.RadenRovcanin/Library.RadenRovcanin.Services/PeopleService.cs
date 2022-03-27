@@ -11,7 +11,7 @@ namespace Library.RadenRovcanin.Services
     {
         private static int autoId = 0;
 
-        private IUnitOfWork _iuow;
+        private readonly IUnitOfWork _iuow;
         public PeopleService(IUnitOfWork iuow)
         {
             _iuow = iuow;
@@ -20,15 +20,11 @@ namespace Library.RadenRovcanin.Services
         public async Task<IEnumerable<PersonDtoResponse>> GetAll()
         {
             var res = await _iuow.People.GetAllAsync();
-
             var l = res.Select(p => new PersonDtoResponse(
                 p.Id,
                 p.FirstName,
                 p.LastName,
-                new AddressDto(
-                    p.Address.Street,
-                    p.Address.City,
-                    p.Address.Country)));
+                new AddressDto()));
 
             return l;
         }
@@ -40,37 +36,20 @@ namespace Library.RadenRovcanin.Services
                 res.Id,
                 res.FirstName,
                 res.LastName,
-                new AddressDto(
-                    res.Address.Street,
-                    res.Address.City,
-                    res.Address.Country));
+                new AddressDto());
         }
 
-        public async Task<IEnumerable<PersonDtoResponse>> GetByCity(string city)
+        public Task<IEnumerable<PersonDtoResponse>> GetByCity(string city)
         {
-            //var res = await _iuow.People.GetByCityAsync(city);
-            //return res.Select(p => new PersonDtoResponse(
-            //    p.Id,
-            //    p.FirstName,
-            //    p.LastName,
-            //    new AddressDto(
-            //        p.Address.Street,
-            //        p.Address.City,
-            //        p.Address.Country)));
-
             throw new NotImplementedException();
         }
 
         public void AddPerson(PersonDtoRequest personDto)
         {
-            Person p = new Person(
-                autoId++,
+            Person p = new(
                 personDto.FirstName,
-                personDto.LastName,
-                new Address(
-                    personDto.Address.Street,
-                    personDto.Address.City,
-                    personDto.Address.Country));
+                personDto.LastName
+                );
             _iuow.People.Add(p);
         }
     }

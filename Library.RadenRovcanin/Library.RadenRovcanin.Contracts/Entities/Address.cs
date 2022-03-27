@@ -2,7 +2,7 @@ namespace Library.RadenRovcanin.Contracts.Entities
 {
     public class Address
     {
-        public int PersonId { get; set; } = default!;
+        public int Id { get; set; } = default!;
         public string Street { get; set; } = default!;
 
         public string City { get; set; } = default!;
@@ -13,6 +13,7 @@ namespace Library.RadenRovcanin.Contracts.Entities
         public Address()
         {
         }
+
         public Address(string street, string city, string country)
         {
             Street = street;
