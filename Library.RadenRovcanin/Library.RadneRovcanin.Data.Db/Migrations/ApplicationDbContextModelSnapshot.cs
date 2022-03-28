@@ -23,11 +23,8 @@ namespace Library.RadenRovcanin.Data.Db.Migrations
 
             modelBuilder.Entity("Library.RadenRovcanin.Contracts.Entities.Address", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("PersonId")
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -44,7 +41,7 @@ namespace Library.RadenRovcanin.Data.Db.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("Id");
+                    b.HasKey("PersonId");
 
                     b.ToTable("Address");
                 });
@@ -52,7 +49,10 @@ namespace Library.RadenRovcanin.Data.Db.Migrations
             modelBuilder.Entity("Library.RadenRovcanin.Contracts.Entities.Person", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -69,20 +69,20 @@ namespace Library.RadenRovcanin.Data.Db.Migrations
                     b.ToTable("People");
                 });
 
-            modelBuilder.Entity("Library.RadenRovcanin.Contracts.Entities.Person", b =>
+            modelBuilder.Entity("Library.RadenRovcanin.Contracts.Entities.Address", b =>
                 {
-                    b.HasOne("Library.RadenRovcanin.Contracts.Entities.Address", "Address")
-                        .WithOne("Person")
-                        .HasForeignKey("Library.RadenRovcanin.Contracts.Entities.Person", "Id")
+                    b.HasOne("Library.RadenRovcanin.Contracts.Entities.Person", "Person")
+                        .WithOne("Address")
+                        .HasForeignKey("Library.RadenRovcanin.Contracts.Entities.Address", "PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Address");
+                    b.Navigation("Person");
                 });
 
-            modelBuilder.Entity("Library.RadenRovcanin.Contracts.Entities.Address", b =>
+            modelBuilder.Entity("Library.RadenRovcanin.Contracts.Entities.Person", b =>
                 {
-                    b.Navigation("Person")
+                    b.Navigation("Address")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

@@ -9,12 +9,12 @@ namespace Library.RadneRovcanin.Data.Db.Configurations
         public void Configure(EntityTypeBuilder<Address> builder)
         {
             builder
-                .HasKey(a => a.Id);
+                .HasKey(a => a.PersonId);
 
             builder
                 .HasOne(a => a.Person)
                 .WithOne(p => p.Address)
-                .HasForeignKey<Person>(p => p.Id);
+                .HasForeignKey<Address>(a => a.PersonId);
 
             builder
                 .Property(a => a.Street)

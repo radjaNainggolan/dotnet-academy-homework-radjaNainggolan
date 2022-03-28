@@ -16,7 +16,7 @@ namespace Library.RadenRovcanin.Data.Db.Repositories
             _dbSet.Add(entity);
         }
 
-        public async Task<IList<TEntity>> GetAllAsync()
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();
         }

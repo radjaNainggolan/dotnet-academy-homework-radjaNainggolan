@@ -1,20 +1,21 @@
-using System.Linq;
 using Library.RadenRovcanin.Contracts.Entities;
 using Library.RadenRovcanin.Contracts.Repositories;
-using Library.RadneRovcanin.Data.Db.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace Library.RadenRovcanin.Data.Db.Repositories
 {
     public class PersonRepository : Repository<Person>, IPersonRepository
     {
-        public PersonRepository(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
+        public PersonRepository(DbContext dbContext) : base(dbContext)
         {
         }
 
-        public async Task<IList<Person>> GetByCityAsync(string city)
+        public async Task<IEnumerable<Person>> GetByCityAsync(string city)
         {
-            return await _dbSet.Where(p => p.Address.City.Equals(city, StringComparison.CurrentCultureIgnoreCase)).Include(p => p.Address).ToListAsync();
+            IQueryable<Person> query = _dbSet
+                .Where(p => p.Address.City == city)
+                .Include(a => a.Address);
+            return await query.ToListAsync();
         }
     }
 }
