@@ -15,31 +15,31 @@ namespace Library.RadenRovcanin.API.Controllers
         }
 
         [HttpGet("all")]
-        public ActionResult<List<PersonDto>> Get()
+        public async Task<ActionResult<IList<PersonDtoResponse>>> Get()
         {
-            List<PersonDto> list = peopleService.GetAll();
+            var list = await peopleService.GetAll();
             return Ok(list);
         }
 
         [HttpGet]
-        public ActionResult<List<PersonDto>> GetByCity([FromQuery] string city)
+        public async Task<ActionResult<IList<PersonDtoResponse>>> GetByCity([FromQuery] string city)
         {
-            List<PersonDto> list = peopleService.GetByCity(city);
+            var list = await peopleService.GetByCity(city);
             return Ok(list);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<PersonDto> GetById([FromRoute] int id)
+        public async Task<ActionResult<PersonDtoResponse>> GetById([FromRoute] int id)
         {
-            PersonDto? personDto = peopleService.GetById(id);
-            return Ok(personDto);
+            var personDtoResponse = await peopleService.GetById(id);
+            return Ok(personDtoResponse);
         }
 
         [HttpPost]
-        public ActionResult<PersonDto> Create([FromBody] PersonDto person)
+        public async Task<ActionResult> Create([FromBody] PersonDtoRequest person)
         {
-            peopleService.AddPerson(person);
-            return this.Created("Person is successfully created", null);
+            await peopleService.AddPerson(person);
+            return Created("Person is successfully created", null);
         }
     }
 }

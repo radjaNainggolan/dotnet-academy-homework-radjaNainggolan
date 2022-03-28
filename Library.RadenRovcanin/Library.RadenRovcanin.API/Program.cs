@@ -1,5 +1,8 @@
+using Library.RadenRovcanin.API;
 using Library.RadenRovcanin.API.CustomMiddleware;
+using Library.RadenRovcanin.Contracts.Repositories;
 using Library.RadenRovcanin.Contracts.Services;
+using Library.RadenRovcanin.Data.Db.Repositories;
 using Library.RadenRovcanin.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +15,9 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<IPeopleService, PeopleService>();
+builder.Services.AddScoped<IPeopleService, PeopleService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+IoC.ConfigureDepengencies(builder.Services, builder.Configuration);
 
 var app = builder.Build();
 

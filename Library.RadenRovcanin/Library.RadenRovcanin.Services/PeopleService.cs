@@ -1,72 +1,55 @@
 using Library.RadenRovcanin.Contracts.Dtos;
 using Library.RadenRovcanin.Contracts.Entities;
+using Library.RadenRovcanin.Contracts.Repositories;
 using Library.RadenRovcanin.Contracts.Services;
 
 namespace Library.RadenRovcanin.Services
 {
     public class PeopleService : IPeopleService
     {
-        private static int autoId = 0;
-
-        private readonly List<Person> people = new()
+        private readonly IUnitOfWork _iuow;
+        public PeopleService(IUnitOfWork iuow)
         {
-            new Person(autoId++, "Raden", "Rovcanin", new Address("Ostroska 7.", "Pljevlja", "Crna Gora")),
-            new Person(autoId++, "Damir", "Delijic", new Address("Profesorska 17.", "Podgorica", "Crna Gora")),
-            new Person(autoId++, "Rade", "Veljic", new Address("Blaza Jovanovica 13.", "Spuz", "Crna Gora")),
-        };
+            _iuow = iuow;
+        }
 
-        public List<PersonDto> GetAll()
+        public async Task<IEnumerable<PersonDtoResponse>> GetAll()
         {
-            return people.ConvertAll(p => new PersonDto(
+            var res = await _iuow.People.GetAllAsync();
+            return res.Select(p => new PersonDtoResponse(
                 p.Id,
                 p.FirstName,
                 p.LastName,
-                new AddressDto(
-                    p.Address.Street,
-                    p.Address.City,
-                    p.Address.Country)));
+                p.DateCreated));
         }
 
-        public PersonDto? GetById(int id)
+        public async Task<PersonDtoResponse?> GetById(int id)
         {
-            PersonDto? personDto = people
-                .Where(x => x.Id == id)
-                .Select(x => new PersonDto(
-                    x.Id,
-                    x.FirstName,
-                    x.LastName,
-                    new AddressDto(
-                        x.Address.Street,
-                        x.Address.City,
-                        x.Address.Country)))
-                .FirstOrDefault();
-
-            return personDto;
+            var p = await _iuow.People.GetByIdAsync(id);
+            return new PersonDtoResponse(
+                p.Id,
+                p.FirstName,
+                p.LastName,
+                p.DateCreated);
         }
 
-        public List<PersonDto> GetByCity(string city)
+        public async Task<IEnumerable<PersonDtoResponse>> GetByCity(string city)
         {
-            List<PersonDto> list = people
-                .Where(x => x.Address.City.Equals(city, StringComparison.CurrentCultureIgnoreCase))
-                .Select(x => new PersonDto(
-                    x.Id,
-                    x.FirstName,
-                    x.LastName,
-                    new AddressDto(x.Address.Street, x.Address.City, x.Address.Country)))
-                .ToList();
-            return list;
+            var res = await _iuow.People.GetByCityAsync(city);
+            return res.Select(p => new PersonDtoResponse(
+                p.Id,
+                p.FirstName,
+                p.LastName,
+                p.DateCreated));
         }
 
-        public void AddPerson(PersonDto personDto)
+        public async Task AddPerson(PersonDtoRequest personDto)
         {
-            people.Add(new Person(
-                autoId++,
+            Person p = new(
                 personDto.FirstName,
-                personDto.LastName,
-                new Address(
-                    personDto.Address.Street,
-                    personDto.Address.City,
-                    personDto.Address.Country)));
+                personDto.LastName);
+            _iuow.People.Add(p);
+            await _iuow.SaveChangesAsync();
         }
     }
 }
