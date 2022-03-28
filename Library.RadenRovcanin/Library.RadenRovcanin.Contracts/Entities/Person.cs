@@ -1,6 +1,6 @@
 namespace Library.RadenRovcanin.Contracts.Entities
 {
-    public class Person
+    public class Person : BaseEntity
     {
         public int Id { get; set; } = default!;
 
@@ -18,6 +18,7 @@ namespace Library.RadenRovcanin.Contracts.Entities
         {
             FirstName = firstName;
             LastName = lastName;
+            DateCreated = DateTime.Now;
         }
     }
 }

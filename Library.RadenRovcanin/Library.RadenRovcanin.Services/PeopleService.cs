@@ -19,16 +19,18 @@ namespace Library.RadenRovcanin.Services
             return res.Select(p => new PersonDtoResponse(
                 p.Id,
                 p.FirstName,
-                p.LastName));
+                p.LastName,
+                p.DateCreated));
         }
 
         public async Task<PersonDtoResponse?> GetById(int id)
         {
-            var res = await _iuow.People.GetByIdAsync(id);
+            var p = await _iuow.People.GetByIdAsync(id);
             return new PersonDtoResponse(
-                res.Id,
-                res.FirstName,
-                res.LastName);
+                p.Id,
+                p.FirstName,
+                p.LastName,
+                p.DateCreated);
         }
 
         public async Task<IEnumerable<PersonDtoResponse>> GetByCity(string city)
@@ -37,7 +39,8 @@ namespace Library.RadenRovcanin.Services
             return res.Select(p => new PersonDtoResponse(
                 p.Id,
                 p.FirstName,
-                p.LastName));
+                p.LastName,
+                p.DateCreated));
         }
 
         public void AddPerson(PersonDtoRequest personDto)
