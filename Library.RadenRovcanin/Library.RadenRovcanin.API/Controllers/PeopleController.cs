@@ -36,10 +36,10 @@ namespace Library.RadenRovcanin.API.Controllers
         }
 
         [HttpPost]
-        public ActionResult<PersonDtoRequest> Create([FromBody] PersonDtoRequest person)
+        public async Task<ActionResult> Create([FromBody] PersonDtoRequest person)
         {
-            peopleService.AddPerson(person);
-            return this.Created("Person is successfully created", null);
+            await peopleService.AddPerson(person);
+            return Created("Person is successfully created", null);
         }
     }
 }

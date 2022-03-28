@@ -9,6 +9,6 @@ namespace Library.RadenRovcanin.Contracts.Services
 
         public Task<IEnumerable<PersonDtoResponse>> GetByCity(string city);
 
-        public void AddPerson(PersonDtoRequest p);
+        public Task AddPerson(PersonDtoRequest p);
     }
 }

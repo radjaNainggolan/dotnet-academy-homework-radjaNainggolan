@@ -43,13 +43,13 @@ namespace Library.RadenRovcanin.Services
                 p.DateCreated));
         }
 
-        public void AddPerson(PersonDtoRequest personDto)
+        public async Task AddPerson(PersonDtoRequest personDto)
         {
             Person p = new(
                 personDto.FirstName,
                 personDto.LastName);
             _iuow.People.Add(p);
-            _iuow.SaveChangesAsync();
+            await _iuow.SaveChangesAsync();
         }
     }
 }
