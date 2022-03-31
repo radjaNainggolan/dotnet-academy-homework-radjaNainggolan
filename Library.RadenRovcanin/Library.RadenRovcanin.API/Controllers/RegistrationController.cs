@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Library.RadenRovcanin.API.Controllers
 {
     [AllowAnonymous]
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     public class RegistrationController : ControllerBase
     {
@@ -19,7 +19,7 @@ namespace Library.RadenRovcanin.API.Controllers
         }
 
         [HttpPost]
-        [Route("register")]
+        [Route("registration")]
 
         public async Task<IActionResult> Register([FromBody] RegistrationRequest request)
         {
