@@ -16,10 +16,11 @@ namespace Library.RadenRovcanin.Contracts.Entities
         {
         }
 
-        public Person(string firstName, string lastName)
+        public Person(string firstName, string lastName, string email)
         {
             FirstName = firstName;
             LastName = lastName;
+            Email = email;
         }
     }
 }
