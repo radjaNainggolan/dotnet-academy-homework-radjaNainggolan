@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Identity;
+
 namespace Library.RadenRovcanin.Contracts.Entities
 {
-    public class Person : BaseEntity
+    public class Person : IdentityUser<int>
     {
-        public int Id { get; set; } = default!;
+        public override int Id { get; set; } = default!;
 
         public string FirstName { get; set; } = default!;
 
@@ -18,7 +20,6 @@ namespace Library.RadenRovcanin.Contracts.Entities
         {
             FirstName = firstName;
             LastName = lastName;
-            DateCreated = DateTime.Now;
         }
     }
 }

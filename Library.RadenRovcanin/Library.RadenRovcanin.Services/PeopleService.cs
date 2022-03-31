@@ -19,8 +19,7 @@ namespace Library.RadenRovcanin.Services
             return res.Select(p => new PersonDtoResponse(
                 p.Id,
                 p.FirstName,
-                p.LastName,
-                p.DateCreated));
+                p.LastName));
         }
 
         public async Task<PersonDtoResponse?> GetById(int id)
@@ -29,8 +28,7 @@ namespace Library.RadenRovcanin.Services
             return new PersonDtoResponse(
                 p.Id,
                 p.FirstName,
-                p.LastName,
-                p.DateCreated);
+                p.LastName);
         }
 
         public async Task<IEnumerable<PersonDtoResponse>> GetByCity(string city)
@@ -39,8 +37,7 @@ namespace Library.RadenRovcanin.Services
             return res.Select(p => new PersonDtoResponse(
                 p.Id,
                 p.FirstName,
-                p.LastName,
-                p.DateCreated));
+                p.LastName));
         }
 
         public async Task AddPerson(PersonDtoRequest personDto)

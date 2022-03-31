@@ -11,17 +11,15 @@ namespace Library.RadenRovcanin.Contracts.Dtos
         [Required(ErrorMessage = "LastName is required")]
         public string LastName { get; set; } = default!;
 
-        public DateTime DateCreated { get; set; } = default!;
         public PersonDtoResponse()
         {
         }
 
-        public PersonDtoResponse(int id, string firstName, string lastName, DateTime created)
+        public PersonDtoResponse(int id, string firstName, string lastName)
         {
             Id = id;
             FirstName = firstName;
             LastName = lastName;
-            DateCreated = created;
         }
     }
 }
