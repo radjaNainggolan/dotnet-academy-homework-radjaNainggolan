@@ -1,6 +1,8 @@
 using Library.RadenRovcanin.Contracts.Dtos;
 using Library.RadenRovcanin.Contracts.Entities;
+using Library.RadenRovcanin.Contracts.Repositories;
 using Library.RadenRovcanin.Contracts.Services;
+using Library.RadenRovcanin.Data.Db.Repositories;
 using Library.RadenRovcanin.Services;
 using Library.RadneRovcanin.Data.Db.Configurations;
 using Microsoft.AspNetCore.Identity;
@@ -19,6 +21,7 @@ namespace Library.RadenRovcanin.API
                         configuration.GetConnectionString("LibraryDB"),
                         opt => opt.MigrationsAssembly("Library.RadenRovcanin.Data.Db"));
                 });
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
         public static void ConfigureServicesDependencies(IServiceCollection services, IConfiguration configuration)
