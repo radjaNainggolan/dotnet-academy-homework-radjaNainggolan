@@ -19,6 +19,7 @@ builder.Services.AddScoped<IPeopleService, PeopleService>();
 
 IoC.ConfigureDatabaseDependencies(builder.Services, builder.Configuration);
 IoC.ConfigureServicesDependencies(builder.Services, builder.Configuration);
+IoC.ConfigureIdentityDependencies(builder.Services, builder.Configuration);
 
 var app = builder.Build();
 
@@ -31,6 +32,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
