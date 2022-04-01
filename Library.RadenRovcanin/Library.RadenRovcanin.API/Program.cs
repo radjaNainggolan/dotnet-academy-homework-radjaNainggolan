@@ -17,7 +17,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IPeopleService, PeopleService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-IoC.ConfigureDepengencies(builder.Services, builder.Configuration);
+IoC.ConfigureDatabaseDependencies(builder.Services, builder.Configuration);
 
 var app = builder.Build();
 

@@ -5,7 +5,7 @@ namespace Library.RadenRovcanin.API
 {
     public static class IoC
     {
-        public static void ConfigureDepengencies(IServiceCollection services, IConfiguration configuration)
+        public static void ConfigureDatabaseDependencies(IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ApplicationDbContext>(
                 opt =>
