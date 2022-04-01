@@ -17,7 +17,7 @@ namespace Library.RadenRovcanin.Services
         public async Task Register(RegistrationRequest request)
         {
             var existingUser = await _userManager.FindByEmailAsync(request.Email);
-            if (existingUser == null)
+            if (existingUser != null)
             {
                 throw new Exception("User already exists!");
             }

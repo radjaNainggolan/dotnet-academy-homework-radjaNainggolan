@@ -17,7 +17,5 @@ namespace Library.RadenRovcanin.Contracts.Requests
         [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; } = default!;
 
-        [Required(ErrorMessage = "Address is required")]
-        public AddressDto Address { get; set; } = default!;
     }
 }
