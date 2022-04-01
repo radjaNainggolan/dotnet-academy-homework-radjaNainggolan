@@ -1,4 +1,9 @@
+using Library.RadenRovcanin.Contracts.Dtos;
+using Library.RadenRovcanin.Contracts.Entities;
+using Library.RadenRovcanin.Contracts.Services;
+using Library.RadenRovcanin.Services;
 using Library.RadneRovcanin.Data.Db.Configurations;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Library.RadenRovcanin.API
@@ -14,6 +19,16 @@ namespace Library.RadenRovcanin.API
                         configuration.GetConnectionString("LibraryDB"),
                         opt => opt.MigrationsAssembly("Library.RadenRovcanin.Data.Db"));
                 });
+        }
+
+        public static void ConfigureServicesDependencies(IServiceCollection services, IConfiguration configuration)
+        {
+            services.Configure<JWTSettings>(configuration.GetSection("JWT"));
+
+            services.AddScoped<UserManager<Person>>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<ITokenGenerator, TokenGenerator>();
+            services.AddScoped<IRegistrationService, RegistrationService>();
         }
     }
 }
