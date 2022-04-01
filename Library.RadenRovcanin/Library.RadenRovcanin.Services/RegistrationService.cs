@@ -25,7 +25,8 @@ namespace Library.RadenRovcanin.Services
             Person user = new Person(
                 request.FirstName,
                 request.LastName,
-                request.Email);
+                request.Email,
+                request.UserName);
 
             var result = await _userManager.CreateAsync(user, request.Password);
 

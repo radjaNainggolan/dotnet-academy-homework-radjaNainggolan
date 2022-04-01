@@ -42,7 +42,7 @@ namespace Library.RadenRovcanin.API
             services.AddIdentity<Person, IdentityRole<int>>(options =>
             {
                 options.Password.RequiredLength = 10;
-                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireDigit = true;
             })
             .AddEntityFrameworkStores<ApplicationDbContext>();

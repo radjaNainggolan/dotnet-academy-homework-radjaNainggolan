@@ -17,5 +17,8 @@ namespace Library.RadenRovcanin.Contracts.Requests
         [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; } = default!;
 
+        [Required(ErrorMessage = "Password is required")]
+        public string UserName { get; set; } = default!;
+
     }
 }
