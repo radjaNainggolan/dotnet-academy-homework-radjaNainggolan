@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using Library.RadenRovcanin.Contracts.Dtos;
 
 namespace Library.RadenRovcanin.Contracts.Requests
 {
@@ -15,10 +14,9 @@ namespace Library.RadenRovcanin.Contracts.Requests
         public string Email { get; set; } = default!;
 
         [Required(ErrorMessage = "Password is required")]
-        public string Password { get; set; } = default!;
-
-        [Required(ErrorMessage = "Password is required")]
         public string UserName { get; set; } = default!;
 
+        [Required(ErrorMessage = "Password is required")]
+        public string Password { get; set; } = default!;
     }
 }

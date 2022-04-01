@@ -5,6 +5,6 @@ namespace Library.RadenRovcanin.Contracts.Services
 {
     public interface IAuthenticationService
     {
-       public Task<TokenDto> Login(AuthenticationRequest request);
+        public Task<TokenDto> Login(AuthenticationRequest request);
     }
 }

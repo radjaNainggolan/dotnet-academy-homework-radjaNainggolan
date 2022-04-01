@@ -22,11 +22,11 @@ namespace Library.RadenRovcanin.Services
                 throw new Exception("User already exists!");
             }
 
-            Person user = new Person(
+            Person user = new(
                 request.FirstName,
                 request.LastName,
-                request.Email,
-                request.UserName);
+                request.UserName,
+                request.Email);
 
             var result = await _userManager.CreateAsync(user, request.Password);
 

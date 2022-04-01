@@ -1,5 +1,4 @@
 using Library.RadenRovcanin.Contracts.Dtos;
-using Library.RadenRovcanin.Contracts.Entities;
 using Library.RadenRovcanin.Contracts.Repositories;
 using Library.RadenRovcanin.Contracts.Services;
 
