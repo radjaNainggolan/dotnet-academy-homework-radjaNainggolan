@@ -43,6 +43,5 @@ namespace Library.RadenRovcanin.Services
 
             return _tokenGenerator.GenerateToken(claims);
         }
-
     }
 }
