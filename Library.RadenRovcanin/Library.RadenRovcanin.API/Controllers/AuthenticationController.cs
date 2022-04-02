@@ -21,7 +21,7 @@ namespace Library.RadenRovcanin.API.Controllers
         public async Task<IActionResult> Login([FromBody] AuthenticationRequest request)
         {
             var token = await _authenticationService.Login(request);
-            return Ok();
+            return Ok(token);
         }
     }
 }

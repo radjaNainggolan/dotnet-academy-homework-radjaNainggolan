@@ -1,8 +1,6 @@
 using Library.RadenRovcanin.API;
 using Library.RadenRovcanin.API.CustomMiddleware;
-using Library.RadenRovcanin.Contracts.Repositories;
 using Library.RadenRovcanin.Contracts.Services;
-using Library.RadenRovcanin.Data.Db.Repositories;
 using Library.RadenRovcanin.Services;
 
 var builder = WebApplication.CreateBuilder(args);

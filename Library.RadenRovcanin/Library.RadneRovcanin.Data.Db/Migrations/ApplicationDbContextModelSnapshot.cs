@@ -44,7 +44,7 @@ namespace Library.RadenRovcanin.Data.Db.Migrations
 
                     b.HasKey("PersonId");
 
-                    b.ToTable("Address");
+                    b.ToTable("Address", (string)null);
                 });
 
             modelBuilder.Entity("Library.RadenRovcanin.Contracts.Entities.Person", b =>
