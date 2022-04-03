@@ -70,6 +70,11 @@ namespace Library.RadenRovcanin.API
                     IssuerSigningKey = new SymmetricSecurityKey(
                         Encoding.UTF8.GetBytes(configuration["JWT:Key"])),
                 };
+            })
+            .AddGoogle(options =>
+            {
+                options.ClientId = configuration["Google:ClientID"];
+                options.ClientSecret = configuration["Google:ClientSecret"];
             });
 
             services.AddAuthorization(options =>
