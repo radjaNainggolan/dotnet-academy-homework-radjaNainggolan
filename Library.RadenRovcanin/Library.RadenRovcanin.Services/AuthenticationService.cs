@@ -39,6 +39,7 @@ namespace Library.RadenRovcanin.Services
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim("FullName", user.FullName),
                 new Claim("Id", user.Id.ToString()),
+                new Claim("Age", user.Age.ToString()),
             };
 
             return _tokenGenerator.GenerateToken(claims);

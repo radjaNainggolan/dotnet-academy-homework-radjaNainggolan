@@ -1,4 +1,5 @@
 using System.Text;
+using Library.RadenRovcanin.API.Policies;
 using Library.RadenRovcanin.Contracts.Dtos;
 using Library.RadenRovcanin.Contracts.Entities;
 using Library.RadenRovcanin.Contracts.Repositories;
@@ -67,6 +68,11 @@ namespace Library.RadenRovcanin.API
                     IssuerSigningKey = new SymmetricSecurityKey(
                         Encoding.UTF8.GetBytes(configuration["JWT:Key"])),
                 };
+            });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("18plus", policy => policy.AddRequirements(new AgeRequirement(18)));
             });
         }
     }

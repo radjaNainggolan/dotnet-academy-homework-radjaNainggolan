@@ -10,6 +10,8 @@ namespace Library.RadenRovcanin.Contracts.Entities
 
         public string LastName { get; set; } = default!;
 
+        public int Age { get; set; } = default!;
+
         public string FullName { get; set; } = default!;
         public Address Address { get; set; } = default!;
 
@@ -17,13 +19,14 @@ namespace Library.RadenRovcanin.Contracts.Entities
         {
         }
 
-        public Person(string firstName, string lastName, string username, string email)
+        public Person(string firstName, string lastName, string username, string email, int age)
         {
             FirstName = firstName;
             LastName = lastName;
             FullName = firstName + " " + lastName;
             UserName = username;
             Email = email;
+            Age = age;
         }
     }
 }

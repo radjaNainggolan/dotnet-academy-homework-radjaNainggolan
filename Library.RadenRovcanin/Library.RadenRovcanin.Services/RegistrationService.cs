@@ -26,7 +26,8 @@ namespace Library.RadenRovcanin.Services
                 request.FirstName,
                 request.LastName,
                 request.UserName,
-                request.Email);
+                request.Email,
+                request.Age);
 
             var result = await _userManager.CreateAsync(user, request.Password);
 
