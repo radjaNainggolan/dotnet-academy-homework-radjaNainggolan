@@ -8,6 +8,7 @@ using Library.RadenRovcanin.Data.Db.Repositories;
 using Library.RadenRovcanin.Services;
 using Library.RadneRovcanin.Data.Db.Configurations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -36,6 +37,7 @@ namespace Library.RadenRovcanin.API
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<ITokenGenerator, TokenGenerator>();
             services.AddScoped<IRegistrationService, RegistrationService>();
+            services.AddScoped<IAuthorizationHandler, AgeRequirementHandler>();
         }
 
         public static void ConfigureIdentityDependencies(IServiceCollection services, IConfiguration configuration)
