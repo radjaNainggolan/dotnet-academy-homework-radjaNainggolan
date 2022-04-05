@@ -4,8 +4,6 @@ namespace Library.RadenRovcanin.Contracts.Entities
 {
     public class Person : IdentityUser<int>
     {
-        public override int Id { get; set; } = default!;
-
         public string FirstName { get; set; } = default!;
 
         public string LastName { get; set; } = default!;

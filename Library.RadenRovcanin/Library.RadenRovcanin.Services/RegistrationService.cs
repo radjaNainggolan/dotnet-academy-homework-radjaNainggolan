@@ -33,7 +33,7 @@ namespace Library.RadenRovcanin.Services
 
             if (!result.Succeeded)
             {
-                var error = string.Join(",", result.Errors.SelectMany(x => x.Description));
+                var error = string.Join("", result.Errors.SelectMany(x => x.Description));
                 throw new Exception(error);
             }
         }
