@@ -33,8 +33,8 @@ namespace Library.RadenRovcanin.Services
 
             if (!result.Succeeded)
             {
-                var error = string.Join("", result.Errors.SelectMany(x => x.Description));
-                throw new Exception(error);
+                var error = string.Concat(result.Errors.Select(x => x.Description));
+                throw new Exception(error.ToString());
             }
         }
     }
