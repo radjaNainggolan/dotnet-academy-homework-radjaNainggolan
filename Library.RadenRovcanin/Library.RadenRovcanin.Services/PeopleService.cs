@@ -1,5 +1,4 @@
 using Library.RadenRovcanin.Contracts.Dtos;
-using Library.RadenRovcanin.Contracts.Entities;
 using Library.RadenRovcanin.Contracts.Repositories;
 using Library.RadenRovcanin.Contracts.Services;
 
@@ -19,8 +18,7 @@ namespace Library.RadenRovcanin.Services
             return res.Select(p => new PersonDtoResponse(
                 p.Id,
                 p.FirstName,
-                p.LastName,
-                p.DateCreated));
+                p.LastName));
         }
 
         public async Task<PersonDtoResponse?> GetById(int id)
@@ -29,8 +27,7 @@ namespace Library.RadenRovcanin.Services
             return new PersonDtoResponse(
                 p.Id,
                 p.FirstName,
-                p.LastName,
-                p.DateCreated);
+                p.LastName);
         }
 
         public async Task<IEnumerable<PersonDtoResponse>> GetByCity(string city)
@@ -39,16 +36,15 @@ namespace Library.RadenRovcanin.Services
             return res.Select(p => new PersonDtoResponse(
                 p.Id,
                 p.FirstName,
-                p.LastName,
-                p.DateCreated));
+                p.LastName));
         }
 
         public async Task AddPerson(PersonDtoRequest personDto)
         {
-            Person p = new(
-                personDto.FirstName,
-                personDto.LastName);
-            _iuow.People.Add(p);
+            //Person p = new(
+            //    personDto.FirstName,
+            //    personDto.LastName);
+            //_iuow.People.Add(p);
             await _iuow.SaveChangesAsync();
         }
     }

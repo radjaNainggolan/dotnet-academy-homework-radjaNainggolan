@@ -1,24 +1,30 @@
+using Microsoft.AspNetCore.Identity;
+
 namespace Library.RadenRovcanin.Contracts.Entities
 {
-    public class Person : BaseEntity
+    public class Person : IdentityUser<int>
     {
-        public int Id { get; set; } = default!;
-
         public string FirstName { get; set; } = default!;
 
         public string LastName { get; set; } = default!;
 
+        public int Age { get; set; } = default!;
+
+        public string FullName { get; set; } = default!;
         public Address Address { get; set; } = default!;
 
         public Person()
         {
         }
 
-        public Person(string firstName, string lastName)
+        public Person(string firstName, string lastName, string username, string email, int age)
         {
             FirstName = firstName;
             LastName = lastName;
-            DateCreated = DateTime.Now;
+            FullName = firstName + " " + lastName;
+            UserName = username;
+            Email = email;
+            Age = age;
         }
     }
 }

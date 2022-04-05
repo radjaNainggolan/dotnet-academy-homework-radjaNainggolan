@@ -1,6 +1,6 @@
 namespace Library.RadenRovcanin.Contracts.Entities
 {
-    public class Address : BaseEntity
+    public class Address
     {
         public int PersonId { get; set; } = default!;
         public string Street { get; set; } = default!;

@@ -15,10 +15,8 @@ namespace Library.RadneRovcanin.Data.Db.Configurations
                 .HasMaxLength(30)
                 .IsRequired();
 
-            builder
-                .Property(p => p.DateCreated)
-                .HasMaxLength(500)
-                .IsRequired();
+            builder.Property(p => p.Age);
+
             builder
                 .Property(p => p.LastName)
                 .HasMaxLength(30)
