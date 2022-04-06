@@ -29,5 +29,36 @@ namespace Library.RadenRovcanin.Contracts.Entities
             Email = email;
             Age = age;
         }
+
+        public void RentBook(Book book)
+        {
+            const int maxNumbersOfBooks = 4;
+
+            if (RentedBooks.Count >= maxNumbersOfBooks)
+            {
+
+            }
+            else if (RentedBooks.Contains(book))
+            {
+
+            }
+            else
+            {
+                RentedBooks.Add(book);
+                book.RemoveFromShelf();
+            }
+        }
+
+        public void ReturnBook(int BookId)
+        {
+            var book = RentedBooks.Find(b => b.Id == BookId);
+            if (book == null)
+            {
+
+            }
+            RentedBooks.Remove(book);
+            book.AddToShelf();
+
+        }
     }
 }
