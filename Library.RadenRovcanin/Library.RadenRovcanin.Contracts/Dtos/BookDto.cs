@@ -8,7 +8,7 @@ namespace Library.RadenRovcanin.Contracts.Dtos
 
         public string Title { get; set; } = default!;
 
-        public Genre Genre { get; set; } = default!;
+        public String Genre { get; set; } = default!;
 
         public string Authors { get; set; } = default!;
 
@@ -17,7 +17,7 @@ namespace Library.RadenRovcanin.Contracts.Dtos
         public BookDto(
             int id,
             string title,
-            Genre genre,
+            string genre,
             string authors,
             int quantity)
         {

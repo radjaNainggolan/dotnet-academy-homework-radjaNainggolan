@@ -1,4 +1,5 @@
 using Library.RadenRovcanin.Contracts.Dtos;
+using Library.RadenRovcanin.Contracts.Entities.Enumerate;
 using Library.RadenRovcanin.Contracts.Repositories;
 using Library.RadenRovcanin.Contracts.Services;
 
@@ -20,7 +21,7 @@ namespace Library.RadenRovcanin.Services
                 .Select(b => new BookDto(
                 b.Id,
                 b.Title,
-                b.Genre,
+                Enum.GetName(typeof(Genre), b.Genre),
                 b.Authors,
                 b.Quantity));
             return books;
@@ -41,11 +42,13 @@ namespace Library.RadenRovcanin.Services
         {
             var person = await _iuow.People.GetByIdAsync(PersonId);
 
+
+
             var books = person.RentedBooks
                 .Select(b => new BookDto(
                     b.Id,
                     b.Title,
-                    b.Genre,
+                    Enum.GetName(typeof(Genre), b.Genre),
                     b.Authors,
                     b.Quantity));
 
