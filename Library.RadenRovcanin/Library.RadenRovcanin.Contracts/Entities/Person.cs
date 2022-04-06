@@ -4,14 +4,17 @@ namespace Library.RadenRovcanin.Contracts.Entities
 {
     public class Person : IdentityUser<int>
     {
-        public string FirstName { get; set; } = default!;
+        public string FirstName { get; } = default!;
 
-        public string LastName { get; set; } = default!;
+        public string LastName { get; } = default!;
 
-        public int Age { get; set; } = default!;
+        public int Age { get; } = default!;
 
-        public string FullName { get; set; } = default!;
-        public Address Address { get; set; } = default!;
+        public string FullName { get; } = default!;
+
+        public Address Address { get; } = default!;
+
+        public List<Book> RentedBooks { get; } = default!;
 
         public Person()
         {
