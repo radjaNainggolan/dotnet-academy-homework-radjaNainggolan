@@ -28,6 +28,7 @@ namespace Library.RadenRovcanin.Contracts.Entities
             UserName = username;
             Email = email;
             Age = age;
+            RentedBooks = new List<Book>();
         }
 
         public void RentBook(Book book)

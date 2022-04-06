@@ -108,7 +108,7 @@ namespace Library.RadenRovcanin.API
                 c.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
-                    { jwtSecurityScheme, new string[] {} },
+                    { jwtSecurityScheme, new string[] { } },
                 });
             });
         }

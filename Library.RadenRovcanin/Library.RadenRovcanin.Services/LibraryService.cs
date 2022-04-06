@@ -42,8 +42,6 @@ namespace Library.RadenRovcanin.Services
         {
             var person = await _iuow.People.GetByIdAsync(PersonId);
 
-
-
             var books = person.RentedBooks
                 .Select(b => new BookDto(
                     b.Id,
