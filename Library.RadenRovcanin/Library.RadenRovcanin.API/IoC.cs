@@ -38,6 +38,7 @@ namespace Library.RadenRovcanin.API
             services.AddScoped<ITokenGenerator, TokenGenerator>();
             services.AddScoped<IRegistrationService, RegistrationService>();
             services.AddScoped<IAuthorizationHandler, AgeRequirementHandler>();
+            services.AddScoped<ILibraryService, LibraryService>();
         }
 
         public static void ConfigureIdentityDependencies(IServiceCollection services, IConfiguration configuration)
