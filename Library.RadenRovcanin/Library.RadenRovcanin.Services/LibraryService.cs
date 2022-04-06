@@ -26,23 +26,40 @@ namespace Library.RadenRovcanin.Services
             return books;
         }
 
-        public Task RentBook(int PersonId, int BookId)
+        public async Task RentBook(int PersonId, int BookId)
         {
-            var book = _iuow.Books.GetByIdAsync(BookId);
+            var book = await _iuow.Books.GetByIdAsync(BookId);
 
-            var person = _iuow.People.GetByIdAsync(PersonId);
+            var person = await _iuow.People.GetByIdAsync(PersonId);
 
-            
+            person.RentBook(book);
+
+            await _iuow.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<BookDto>> RentedBooks()
+        public async Task<IEnumerable<BookDto>> RentedBooks(int PersonId)
         {
-            throw new NotImplementedException();
+            var person = await _iuow.People.GetByIdAsync(PersonId);
+
+            var books = person.RentedBooks
+                .Select(b => new BookDto(
+                    b.Id,
+                    b.Title,
+                    b.Genre,
+                    b.Authors,
+                    b.Quantity));
+
+            return books;
         }
 
-        public Task ReturnBook(int PersonId, int BookId)
+        public async Task ReturnBook(int PersonId, int BookId)
         {
-            throw new NotImplementedException();
+            var person = await _iuow.People.GetByIdAsync(PersonId);
+
+            person.ReturnBook(BookId);
+
+            await _iuow.SaveChangesAsync();
+
         }
     }
 }
