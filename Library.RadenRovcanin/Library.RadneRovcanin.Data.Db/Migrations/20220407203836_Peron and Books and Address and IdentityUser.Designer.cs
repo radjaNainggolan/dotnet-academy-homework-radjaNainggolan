@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Library.RadenRovcanin.Data.Db.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220406111253_Book entity and Book repository, relationship with Person")]
-    partial class BookentityandBookrepositoryrelationshipwithPerson
+    [Migration("20220407203836_Peron and Books and Address and IdentityUser")]
+    partial class PeronandBooksandAddressandIdentityUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -75,7 +75,7 @@ namespace Library.RadenRovcanin.Data.Db.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Book");
+                    b.ToTable("Books");
                 });
 
             modelBuilder.Entity("Library.RadenRovcanin.Contracts.Entities.Person", b =>

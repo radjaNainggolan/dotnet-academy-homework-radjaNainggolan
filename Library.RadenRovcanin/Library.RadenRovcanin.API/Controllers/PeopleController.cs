@@ -1,3 +1,4 @@
+using Library.RadenRovcanin.Contracts;
 using Library.RadenRovcanin.Contracts.Dtos;
 using Library.RadenRovcanin.Contracts.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -31,8 +32,15 @@ namespace Library.RadenRovcanin.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<PersonDtoResponse>> GetById([FromRoute] int id)
         {
-            var personDtoResponse = await peopleService.GetById(id);
-            return Ok(personDtoResponse);
+            try
+            {
+                var personDtoResponse = await peopleService.GetById(id);
+                return Ok(personDtoResponse);
+            }
+            catch (EntityNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         [HttpPost]

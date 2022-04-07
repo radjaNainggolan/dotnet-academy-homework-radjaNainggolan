@@ -44,7 +44,7 @@ namespace Library.RadenRovcanin.Data.Db.Migrations
 
                     b.HasKey("PersonId");
 
-                    b.ToTable("Address", (string)null);
+                    b.ToTable("Address");
                 });
 
             modelBuilder.Entity("Library.RadenRovcanin.Contracts.Entities.Book", b =>
@@ -73,7 +73,7 @@ namespace Library.RadenRovcanin.Data.Db.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Books", (string)null);
+                    b.ToTable("Books");
                 });
 
             modelBuilder.Entity("Library.RadenRovcanin.Contracts.Entities.Person", b =>
@@ -302,7 +302,7 @@ namespace Library.RadenRovcanin.Data.Db.Migrations
 
                     b.HasIndex("PersonId");
 
-                    b.ToTable("PersonBook", (string)null);
+                    b.ToTable("PersonBook");
                 });
 
             modelBuilder.Entity("Library.RadenRovcanin.Contracts.Entities.Address", b =>

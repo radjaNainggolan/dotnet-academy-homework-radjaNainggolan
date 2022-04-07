@@ -60,7 +60,6 @@ namespace Library.RadenRovcanin.Services
             person.ReturnBook(BookId);
 
             await _iuow.SaveChangesAsync();
-
         }
     }
 }

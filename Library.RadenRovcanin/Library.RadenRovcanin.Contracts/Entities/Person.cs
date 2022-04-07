@@ -11,8 +11,6 @@ namespace Library.RadenRovcanin.Contracts.Entities
 
         public int Age { get; } = default!;
 
-        public string FullName { get; } = default!;
-
         public Address Address { get; } = default!;
 
         public List<Book> RentedBooks { get; set; } = default!;
@@ -21,14 +19,14 @@ namespace Library.RadenRovcanin.Contracts.Entities
         {
         }
 
-        public Person(string firstName, string lastName, string username, string email, int age)
+        public Person(string firstName, string lastName, string email,string userName, int age, Address address)
         {
             FirstName = firstName;
             LastName = lastName;
-            FullName = firstName + " " + lastName;
-            UserName = username;
+            UserName = userName;
             Email = email;
             Age = age;
+            Address = address;
         }
 
         public void RentBook(Book book)

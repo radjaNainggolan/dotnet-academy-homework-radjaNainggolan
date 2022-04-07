@@ -26,9 +26,13 @@ namespace Library.RadenRovcanin.Services
             Person user = new(
                 request.FirstName,
                 request.LastName,
-                request.UserName,
                 request.Email,
-                request.Age);
+                request.UserName,
+                request.Age,
+                new Address(
+                    request.Address.Street,
+                    request.Address.City,
+                    request.Address.Country));
 
             var result = await _userManager.CreateAsync(user, request.Password);
 
