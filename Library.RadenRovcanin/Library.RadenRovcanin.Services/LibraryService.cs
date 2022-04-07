@@ -27,20 +27,20 @@ namespace Library.RadenRovcanin.Services
             return books;
         }
 
-        public async Task RentBook(int PersonId, int BookId)
+        public async Task RentBook(int personId, int bookId)
         {
-            var book = await _iuow.Books.GetByIdAsync(BookId);
+            var book = await _iuow.Books.GetByIdAsync(bookId);
 
-            var person = await _iuow.People.GetByIdWithBooksAsync(PersonId);
+            var person = await _iuow.People.GetByIdWithBooksAsync(personId);
 
             person.RentBook(book);
 
             await _iuow.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<BookDto>> RentedBooks(int PersonId)
+        public async Task<IEnumerable<BookDto>> RentedBooks(int personId)
         {
-            var person = await _iuow.People.GetByIdWithBooksAsync(PersonId);
+            var person = await _iuow.People.GetByIdWithBooksAsync(personId);
 
             var books = person.RentedBooks
                 .Select(b => new BookDto(
@@ -53,11 +53,11 @@ namespace Library.RadenRovcanin.Services
             return books;
         }
 
-        public async Task ReturnBook(int PersonId, int BookId)
+        public async Task ReturnBook(int personId, int bookId)
         {
-            var person = await _iuow.People.GetByIdWithBooksAsync(PersonId);
+            var person = await _iuow.People.GetByIdWithBooksAsync(personId);
 
-            person.ReturnBook(BookId);
+            person.ReturnBook(bookId);
 
             await _iuow.SaveChangesAsync();
         }

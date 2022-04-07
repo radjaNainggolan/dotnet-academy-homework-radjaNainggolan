@@ -79,13 +79,10 @@ namespace Library.RadenRovcanin.API
                 options.ClientSecret = configuration["Google:ClientSecret"];
             });
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("18plus", policy => policy.AddRequirements(new AgeRequirement(18)));
-            });
+            services.AddAuthorization(options => options.AddPolicy("18plus", policy => policy.AddRequirements(new AgeRequirement(18))));
         }
 
-        public static void ConfigureSwaggerDependencies(IServiceCollection services, IConfiguration configuration)
+        public static void ConfigureSwaggerDependencies(IServiceCollection services)
         {
             services.AddSwaggerGen(c =>
             {
@@ -108,7 +105,7 @@ namespace Library.RadenRovcanin.API
                 c.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
-                    { jwtSecurityScheme, new string[] { } },
+                    { jwtSecurityScheme, Array.Empty<string>() },
                 });
             });
         }

@@ -39,7 +39,7 @@ namespace Library.RadenRovcanin.Services
             if (!result.Succeeded)
             {
                 var error = string.Concat(result.Errors.Select(x => x.Description));
-                throw new UserRegistrationException(error.ToString());
+                throw new UserRegistrationException(error);
             }
         }
     }

@@ -6,7 +6,7 @@ namespace Library.RadenRovcanin.Contracts.Repositories
     {
         public Task<IEnumerable<Person>> GetByCityAsync(string city);
         public Task<IEnumerable<Person>> GetAllWithAddressAsync();
-        public Task<Person> GetByIdWithAddressAsync(int id);
-        public Task<Person> GetByIdWithBooksAsync(int id);
+        public Task<Person?> GetByIdWithAddressAsync(int id);
+        public Task<Person?> GetByIdWithBooksAsync(int id);
     }
 }

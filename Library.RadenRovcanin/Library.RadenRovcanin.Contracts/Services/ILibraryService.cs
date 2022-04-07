@@ -6,10 +6,10 @@ namespace Library.RadenRovcanin.Contracts.Services
     {
         public Task<IEnumerable<BookDto>> GetAll();
 
-        public Task RentBook(int PersonId, int BookId);
+        public Task RentBook(int personId, int bookId);
 
-        public Task ReturnBook(int PersonId, int BookId);
+        public Task ReturnBook(int personId, int bookId);
 
-        public Task<IEnumerable<BookDto>> RentedBooks(int PersonId);
+        public Task<IEnumerable<BookDto>> RentedBooks(int personId);
     }
 }

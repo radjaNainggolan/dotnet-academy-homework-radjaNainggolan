@@ -19,7 +19,7 @@ namespace Library.RadenRovcanin.Contracts.Entities
         {
         }
 
-        public Person(string firstName, string lastName, string email,string userName, int age, Address address)
+        public Person(string firstName, string lastName, string email, string userName, int age, Address address)
         {
             FirstName = firstName;
             LastName = lastName;

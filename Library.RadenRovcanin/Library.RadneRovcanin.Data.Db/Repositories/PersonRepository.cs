@@ -25,7 +25,7 @@ namespace Library.RadenRovcanin.Data.Db.Repositories
             return await query.ToListAsync();
         }
 
-        public async Task<Person> GetByIdWithAddressAsync(int id)
+        public async Task<Person?> GetByIdWithAddressAsync(int id)
         {
             IQueryable<Person> query = _dbSet
                 .Where(p => p.Id == id)
@@ -33,7 +33,7 @@ namespace Library.RadenRovcanin.Data.Db.Repositories
             return await query.FirstOrDefaultAsync();
         }
 
-        public async Task<Person> GetByIdWithBooksAsync(int id)
+        public async Task<Person?> GetByIdWithBooksAsync(int id)
         {
             IQueryable<Person> query = _dbSet
                 .Where(p => p.Id == id)
