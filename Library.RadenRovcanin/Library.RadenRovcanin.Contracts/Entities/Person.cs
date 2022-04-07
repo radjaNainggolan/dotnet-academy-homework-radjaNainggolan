@@ -60,7 +60,6 @@ namespace Library.RadenRovcanin.Contracts.Entities
 
             RentedBooks.Remove(book);
             book.AddToShelf();
-
         }
     }
 }

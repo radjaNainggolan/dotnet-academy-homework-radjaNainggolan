@@ -31,7 +31,7 @@ namespace Library.RadenRovcanin.Services
         {
             var book = await _iuow.Books.GetByIdAsync(BookId);
 
-            var person = await _iuow.People.GetByIdAsync(PersonId);
+            var person = await _iuow.People.GetByIdWithBooksAsync(PersonId);
 
             person.RentBook(book);
 
@@ -40,7 +40,7 @@ namespace Library.RadenRovcanin.Services
 
         public async Task<IEnumerable<BookDto>> RentedBooks(int PersonId)
         {
-            var person = await _iuow.People.GetByIdAsync(PersonId);
+            var person = await _iuow.People.GetByIdWithBooksAsync(PersonId);
 
             var books = person.RentedBooks
                 .Select(b => new BookDto(
@@ -55,7 +55,7 @@ namespace Library.RadenRovcanin.Services
 
         public async Task ReturnBook(int PersonId, int BookId)
         {
-            var person = await _iuow.People.GetByIdAsync(PersonId);
+            var person = await _iuow.People.GetByIdWithBooksAsync(PersonId);
 
             person.ReturnBook(BookId);
 
