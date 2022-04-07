@@ -1,3 +1,5 @@
+using Library.RadenRovcanin.Contracts;
+using Library.RadenRovcanin.Contracts.Exceptions;
 using Library.RadenRovcanin.Contracts.Requests;
 using Library.RadenRovcanin.Contracts.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -20,8 +22,19 @@ namespace Library.RadenRovcanin.API.Controllers
 
         public async Task<IActionResult> Login([FromBody] AuthenticationRequest request)
         {
-            var token = await _authenticationService.Login(request);
-            return Ok(token);
+            try
+            {
+                var token = await _authenticationService.Login(request);
+                return Ok(token);
+            }
+            catch (EntityNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (UserAuthenticationException ex)
+            {
+                return Unauthorized(ex.Message);
+            }
         }
     }
 }

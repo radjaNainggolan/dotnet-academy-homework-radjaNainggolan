@@ -23,7 +23,6 @@ namespace Library.RadenRovcanin.Data.Db.Repositories
             IQueryable<Person> query = _dbSet
                 .Where(p => p.Id == id)
                 .Include(b => b.RentedBooks);
-
             return await query.FirstOrDefaultAsync();
         }
     }

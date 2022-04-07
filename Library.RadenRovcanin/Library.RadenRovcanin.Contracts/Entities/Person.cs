@@ -50,9 +50,9 @@ namespace Library.RadenRovcanin.Contracts.Entities
             }
         }
 
-        public void ReturnBook(int BookId)
+        public void ReturnBook(int bookId)
         {
-            var book = RentedBooks.Find(b => b.Id == BookId);
+            var book = RentedBooks.Find(b => b.Id == bookId);
             if (book == null)
             {
                 throw new EntityNotFoundException("Book can not be found in person rented books");
