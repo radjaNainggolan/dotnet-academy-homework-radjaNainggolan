@@ -1,3 +1,4 @@
+using Library.RadenRovcanin.Contracts.Exceptions;
 using Microsoft.AspNetCore.Identity;
 
 namespace Library.RadenRovcanin.Contracts.Entities
@@ -14,7 +15,7 @@ namespace Library.RadenRovcanin.Contracts.Entities
 
         public Address Address { get; } = default!;
 
-        public List<Book> RentedBooks { get; } = default!;
+        public List<Book> RentedBooks { get; set; } = default!;
 
         public Person()
         {
@@ -28,7 +29,6 @@ namespace Library.RadenRovcanin.Contracts.Entities
             UserName = username;
             Email = email;
             Age = age;
-            RentedBooks = new List<Book>();
         }
 
         public void RentBook(Book book)
@@ -37,11 +37,11 @@ namespace Library.RadenRovcanin.Contracts.Entities
 
             if (RentedBooks.Count >= maxNumbersOfBooks)
             {
-
+                throw new BookRentingException("Maximum number of book exceeded");
             }
             else if (RentedBooks.Contains(book))
             {
-
+                throw new BookRentingException("Book already rented");
             }
             else
             {
@@ -55,8 +55,9 @@ namespace Library.RadenRovcanin.Contracts.Entities
             var book = RentedBooks.Find(b => b.Id == BookId);
             if (book == null)
             {
-
+                throw new EntityNotFoundException("Book can not be found in person rented books");
             }
+
             RentedBooks.Remove(book);
             book.AddToShelf();
 

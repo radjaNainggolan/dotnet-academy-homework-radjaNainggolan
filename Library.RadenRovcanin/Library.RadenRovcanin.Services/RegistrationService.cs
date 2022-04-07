@@ -1,4 +1,5 @@
 using Library.RadenRovcanin.Contracts.Entities;
+using Library.RadenRovcanin.Contracts.Exceptions;
 using Library.RadenRovcanin.Contracts.Requests;
 using Library.RadenRovcanin.Contracts.Services;
 using Microsoft.AspNetCore.Identity;
@@ -19,7 +20,7 @@ namespace Library.RadenRovcanin.Services
             var existingUser = await _userManager.FindByEmailAsync(request.Email);
             if (existingUser != null)
             {
-                throw new Exception("User already exists!");
+                throw new EntityAlreadyExistsException("User already exists!");
             }
 
             Person user = new(

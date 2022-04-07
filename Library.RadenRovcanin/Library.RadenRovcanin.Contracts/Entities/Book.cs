@@ -1,4 +1,5 @@
 using Library.RadenRovcanin.Contracts.Entities.Enumerate;
+using Library.RadenRovcanin.Contracts.Exceptions;
 
 namespace Library.RadenRovcanin.Contracts.Entities
 {
@@ -39,7 +40,7 @@ namespace Library.RadenRovcanin.Contracts.Entities
         {
             if (!IsAvaliable())
             {
-                throw new ArgumentException("Insuficient book quantity.");
+                throw new BookNotAvaliableException(this);
             }
             else
             {

@@ -1,6 +1,8 @@
 using System.Security.Claims;
+using Library.RadenRovcanin.Contracts;
 using Library.RadenRovcanin.Contracts.Dtos;
 using Library.RadenRovcanin.Contracts.Entities;
+using Library.RadenRovcanin.Contracts.Exceptions;
 using Library.RadenRovcanin.Contracts.Requests;
 using Library.RadenRovcanin.Contracts.Services;
 using Microsoft.AspNetCore.Identity;
@@ -24,14 +26,14 @@ namespace Library.RadenRovcanin.Services
 
             if (user == null)
             {
-                throw new Exception("User not found in system");
+                throw new EntityNotFoundException("User not found in system");
             }
 
             var isValidPassword = await _userManager.CheckPasswordAsync(user, request.Password);
 
             if (!isValidPassword)
             {
-                throw new Exception("Invalid password!");
+                throw new UserAuthenticationException("Invalid password!");
             }
 
             var claims = new List<Claim>
