@@ -21,6 +21,14 @@ namespace Library.RadneRovcanin.Data.Db.Configurations
                 .Property(p => p.LastName)
                 .HasMaxLength(30)
                 .IsRequired();
+
+            builder
+                .HasMany(p => p.RentedBooks)
+                .WithMany(b => b.People)
+                .UsingEntity<Dictionary<string, object>>(
+                "PersonBook",
+                b => b.HasOne<Book>().WithMany().HasForeignKey("BookdId"),
+                p => p.HasOne<Person>().WithMany().HasForeignKey("PersonId"));
         }
     }
 }

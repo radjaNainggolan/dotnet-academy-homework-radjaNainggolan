@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 namespace Library.RadenRovcanin.API
 {
@@ -38,6 +39,7 @@ namespace Library.RadenRovcanin.API
             services.AddScoped<ITokenGenerator, TokenGenerator>();
             services.AddScoped<IRegistrationService, RegistrationService>();
             services.AddScoped<IAuthorizationHandler, AgeRequirementHandler>();
+            services.AddScoped<ILibraryService, LibraryService>();
         }
 
         public static void ConfigureIdentityDependencies(IServiceCollection services, IConfiguration configuration)
@@ -77,9 +79,34 @@ namespace Library.RadenRovcanin.API
                 options.ClientSecret = configuration["Google:ClientSecret"];
             });
 
-            services.AddAuthorization(options =>
+            services.AddAuthorization(options => options.AddPolicy("18plus", policy => policy.AddRequirements(new AgeRequirement(18))));
+        }
+
+        public static void ConfigureSwaggerDependencies(IServiceCollection services)
+        {
+            services.AddSwaggerGen(c =>
             {
-                options.AddPolicy("18plus", policy => policy.AddRequirements(new AgeRequirement(18)));
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "AcademyExample.Api", Version = "v1" });
+                var jwtSecurityScheme = new OpenApiSecurityScheme
+                {
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    Name = "JWT Authentication",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+
+                    Reference = new OpenApiReference
+                    {
+                        Id = JwtBearerDefaults.AuthenticationScheme,
+                        Type = ReferenceType.SecurityScheme,
+                    },
+                };
+
+                c.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    { jwtSecurityScheme, Array.Empty<string>() },
+                });
             });
         }
     }

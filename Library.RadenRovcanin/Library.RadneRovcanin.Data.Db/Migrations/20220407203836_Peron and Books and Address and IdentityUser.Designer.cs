@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Library.RadenRovcanin.Data.Db.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220403005236_Age property for Person")]
-    partial class AgepropertyforPerson
+    [Migration("20220407203836_Peron and Books and Address and IdentityUser")]
+    partial class PeronandBooksandAddressandIdentityUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,6 +49,35 @@ namespace Library.RadenRovcanin.Data.Db.Migrations
                     b.ToTable("Address");
                 });
 
+            modelBuilder.Entity("Library.RadenRovcanin.Contracts.Entities.Book", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Authors")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("Genre")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Books");
+                });
+
             modelBuilder.Entity("Library.RadenRovcanin.Contracts.Entities.Person", b =>
                 {
                     b.Property<int>("Id")
@@ -78,10 +107,6 @@ namespace Library.RadenRovcanin.Data.Db.Migrations
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -267,6 +292,21 @@ namespace Library.RadenRovcanin.Data.Db.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("PersonBook", b =>
+                {
+                    b.Property<int>("BookdId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BookdId", "PersonId");
+
+                    b.HasIndex("PersonId");
+
+                    b.ToTable("PersonBook");
+                });
+
             modelBuilder.Entity("Library.RadenRovcanin.Contracts.Entities.Address", b =>
                 {
                     b.HasOne("Library.RadenRovcanin.Contracts.Entities.Person", "Person")
@@ -325,6 +365,21 @@ namespace Library.RadenRovcanin.Data.Db.Migrations
                     b.HasOne("Library.RadenRovcanin.Contracts.Entities.Person", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PersonBook", b =>
+                {
+                    b.HasOne("Library.RadenRovcanin.Contracts.Entities.Book", null)
+                        .WithMany()
+                        .HasForeignKey("BookdId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Library.RadenRovcanin.Contracts.Entities.Person", null)
+                        .WithMany()
+                        .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

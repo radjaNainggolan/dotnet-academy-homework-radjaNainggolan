@@ -1,3 +1,4 @@
+using Library.RadenRovcanin.Contracts.Exceptions;
 using Library.RadenRovcanin.Contracts.Requests;
 using Library.RadenRovcanin.Contracts.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -22,8 +23,19 @@ namespace Library.RadenRovcanin.API.Controllers
 
         public async Task<IActionResult> Register([FromBody] RegistrationRequest request)
         {
-            await _registrationService.Register(request);
-            return Ok();
+            try
+            {
+                await _registrationService.Register(request);
+                return Ok();
+            }
+            catch (EntityAlreadyExistsException ex)
+            {
+                return Conflict(ex.Message);
+            }
+            catch (UserRegistrationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
