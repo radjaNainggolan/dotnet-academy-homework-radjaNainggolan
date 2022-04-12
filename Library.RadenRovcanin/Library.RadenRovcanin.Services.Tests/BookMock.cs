@@ -3,9 +3,8 @@ using Library.RadenRovcanin.Contracts.Entities.Enumerate;
 
 namespace Library.RadenRovcanin.Services.Tests
 {
-    public class BookMock
+    public static class BookMock
     {
-
         public static Book Build(int quantity = 10)
         {
             return new Book(

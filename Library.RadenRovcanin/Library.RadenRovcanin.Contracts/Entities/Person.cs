@@ -29,6 +29,18 @@ namespace Library.RadenRovcanin.Contracts.Entities
             Address = address;
         }
 
+        public Person(int id, string firstName, string lastName, string email, string userName, int age, Address address)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            UserName = userName;
+            Email = email;
+            Age = age;
+            Address = address;
+            RentedBooks = new List<Book>();
+        }
+
         public void RentBook(Book book)
         {
             const int maxNumbersOfBooks = 4;
@@ -36,6 +48,10 @@ namespace Library.RadenRovcanin.Contracts.Entities
             if (RentedBooks.Count >= maxNumbersOfBooks)
             {
                 throw new BookRentingException("Maximum number of book exceeded");
+            }
+            else if (book == null)
+            {
+                throw new EntityNotFoundException();
             }
             else if (RentedBooks.Contains(book))
             {

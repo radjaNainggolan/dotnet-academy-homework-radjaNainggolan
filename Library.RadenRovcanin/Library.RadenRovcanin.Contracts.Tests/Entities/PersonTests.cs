@@ -5,7 +5,7 @@ namespace Library.RadenRovcanin.Contracts.Tests
 {
     public class PersonTests
     {
-        private Person _sut;
+        private readonly Person _sut;
 
         public PersonTests()
         {
@@ -15,7 +15,6 @@ namespace Library.RadenRovcanin.Contracts.Tests
         [Fact]
         public void Test1()
         {
-
         }
     }
 }
