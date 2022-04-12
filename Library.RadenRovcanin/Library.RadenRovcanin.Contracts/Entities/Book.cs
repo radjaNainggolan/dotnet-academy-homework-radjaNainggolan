@@ -29,6 +29,20 @@ namespace Library.RadenRovcanin.Contracts.Entities
             Quantity = quantity;
         }
 
+        public Book(
+            int id,
+            string title,
+            Genre genre,
+            string authors,
+            int quantity)
+        {
+            Id = id;
+            Title = title;
+            Genre = genre;
+            Authors = authors;
+            Quantity = quantity;
+        }
+
         public bool IsAvaliable() => Quantity > 0;
 
         public void AddToShelf()
