@@ -15,10 +15,6 @@ namespace Library.RadenRovcanin.Contracts.Entities
 
         public List<Book> RentedBooks { get; set; } = default!;
 
-        public Person()
-        {
-        }
-
         public Person(string firstName, string lastName, string email, string userName, int age, Address address)
         {
             FirstName = firstName;
@@ -41,6 +37,11 @@ namespace Library.RadenRovcanin.Contracts.Entities
             RentedBooks = new List<Book>();
         }
 
+        public Person()
+        {
+            RentedBooks = new List<Book>();
+        }
+
         public void RentBook(Book book)
         {
             const int maxNumbersOfBooks = 4;
@@ -56,6 +57,10 @@ namespace Library.RadenRovcanin.Contracts.Entities
             else if (RentedBooks.Contains(book))
             {
                 throw new BookRentingException("Book already rented");
+            }
+            else if (book.Quantity == 0)
+            {
+                throw new BookRentingException("Book is not currently avaliable.");
             }
             else
             {
