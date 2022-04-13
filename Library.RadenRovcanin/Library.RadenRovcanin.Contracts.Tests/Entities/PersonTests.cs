@@ -44,12 +44,13 @@ namespace Library.RadenRovcanin.Contracts.Tests
         {
             // arrange
             var book = BookMock.Build(10);
-            _sut.RentBook(book);
+            _sut.RentedBooks.Add(book);
+
             // act
             _sut.ReturnBook(book.Id);
 
             // assert
-            book.Quantity.Should().Be(10);
+            book.Quantity.Should().Be(11);
         }
 
         [Fact]
@@ -61,6 +62,7 @@ namespace Library.RadenRovcanin.Contracts.Tests
             // act
             Action action = () => _sut.ReturnBook(bookId);
 
+            // assert
             action.Should().Throw<EntityNotFoundException>();
         }
     }
