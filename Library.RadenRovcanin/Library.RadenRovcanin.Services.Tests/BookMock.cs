@@ -8,7 +8,7 @@ namespace Library.RadenRovcanin.Services.Tests
         public static Book Build(int quantity = 10)
         {
             return new Book(
-                1,
+                0,
                 "Title",
                 Genre.Classic,
                 "Author",

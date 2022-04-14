@@ -105,14 +105,15 @@ namespace Library.RadenRovcanin.Services.Tests
         //    var person = PersonMock.Build();
         //    var personId = person.Id;
 
+        //    //_unitOfWorkMock.Setup(m => m.Books.GetByIdAsync(bookId)).ReturnsAsync(book);
         //    _unitOfWorkMock.Setup(m => m.People.GetByIdWithBooksAsync(personId)).ReturnsAsync(person);
-
         //    await _sut.RentBook(personId, bookId);
         //    // act
         //    await _sut.ReturnBook(personId, bookId);
 
         //    // assert
         //    _unitOfWorkMock.Verify(m => m.People.GetByIdWithBooksAsync(personId), Times.Once);
+        //    _unitOfWorkMock.Verify(m => m.Books.GetByIdAsync(bookId), Times.Once);
         //    _unitOfWorkMock.Verify(m => m.SaveChangesAsync(), Times.Once);
         //}
 

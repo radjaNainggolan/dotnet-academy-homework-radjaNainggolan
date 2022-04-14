@@ -17,6 +17,16 @@ namespace Library.RadenRovcanin.Contracts.Tests.Entities
             _sut = new Book();
         }
 
+        [Fact]
+        public void ConstructorBook_WhenParamsAreValid_ThenSuccessfully()
+        {
+            var bookMock = BookMock.Build();
+
+            var book = new Book(bookMock.Title, bookMock.Genre, bookMock.Authors, bookMock.Quantity);
+
+            bookMock.Should().BeEquivalentTo(book);
+        }
+
         [Theory]
         [InlineData("    ", Genre.Fantasy, "Test Author", 10, "Title is required")]
         [InlineData(null, Genre.Fantasy, "Test Author", 10, "Title is required")]
@@ -40,7 +50,6 @@ namespace Library.RadenRovcanin.Contracts.Tests.Entities
             Action bookCreation = () => new Book(title, genre, authors, quantity);
             bookCreation.Should().Throw<ArgumentException>().WithMessage(expectedExcpetionMsg);
         }
-
 
         [Fact]
         public void IsAvaliable_WhenQuantityIsGreatherThan0_ThenReturnTrue()
