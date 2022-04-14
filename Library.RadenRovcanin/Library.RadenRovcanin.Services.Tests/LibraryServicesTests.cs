@@ -59,7 +59,7 @@ namespace Library.RadenRovcanin.Services.Tests
         }
 
         [Fact]
-        public async Task RentBook_WhenRepositoryReturnsData_ThanMapToDto()
+        public async Task RentBook_WhenRepositoryReturnsData_Successfully()
         {
             // arrange
             var book = BookMock.Build();
@@ -77,6 +77,40 @@ namespace Library.RadenRovcanin.Services.Tests
             _unitOfWorkMock.Verify(m => m.People.GetByIdWithBooksAsync(personId), Times.Once);
             _unitOfWorkMock.Verify(m => m.Books.GetByIdAsync(bookId), Times.Once);
             _unitOfWorkMock.Verify(m => m.SaveChangesAsync(), Times.Once);
+        }
+
+        [Fact]
+        public async Task RentedBooks_WhenUserHaveRentedBooks_ThanMapToDto()
+        {
+            // arrange
+            var book = BookMock.Build();
+            var person = PersonMock.Build();
+            var personId = person.Id;
+            person.RentedBooks.Add(book);
+
+            _unitOfWorkMock.Setup(m => m.People.GetByIdWithBooksAsync(personId)).ReturnsAsync(person);
+
+            // act
+            var actualResult = await _sut.RentedBooks(personId);
+
+            // assert
+            person.RentedBooks.Should().BeEquivalentTo(actualResult);
+        }
+
+        [Fact]
+        public async Task RentedBooks_WhenUserDoNotHaveRentedBooks_ThanReturnEmptyArray()
+        {
+            var person = PersonMock.Build();
+            var personId = person.Id;
+            // arrange
+            _unitOfWorkMock.Setup(m => m.People.GetByIdWithBooksAsync(personId)).ReturnsAsync(person);
+
+            // act
+            var actualResult = await _sut.RentedBooks(personId);
+
+            // assert
+            actualResult.Should().BeEmpty();
+
         }
 
         [Fact]
