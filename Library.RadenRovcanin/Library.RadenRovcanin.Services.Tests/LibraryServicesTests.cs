@@ -90,11 +90,21 @@ namespace Library.RadenRovcanin.Services.Tests
 
             _unitOfWorkMock.Setup(m => m.People.GetByIdWithBooksAsync(personId)).ReturnsAsync(person);
 
+            var expectedResult = new[]
+            {
+                new BookDto(
+                    book.Id,
+                    book.Title,
+                    book.Genre,
+                    book.Authors,
+                    book.Quantity),
+            };
+
             // act
             var actualResult = await _sut.RentedBooks(personId);
 
             // assert
-            person.RentedBooks.Should().BeEquivalentTo(actualResult);
+            expectedResult.Should().BeEquivalentTo(actualResult);
         }
 
         [Fact]
