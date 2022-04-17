@@ -16,7 +16,7 @@ namespace Library.RadenRovcanin.API.CustomMiddleware
         public async Task Invoke(HttpContext httpContext)
         {
             StringValues headers = httpContext.Request.Headers.UserAgent;
-            string message = $"Logging header {headers.First()}";
+            string message = $"Logging header {headers[0]}";
             logger.LogInformation(message: message);
 
             await this.next(httpContext);

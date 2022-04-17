@@ -20,10 +20,11 @@ namespace Library.RadenRovcanin.Contracts.Tests
         {
             // arrange
             var book = BookMock.Build(10);
+
             // act
             _sut.RentBook(book);
             // assert
-            book.Quantity.Should().Be(9);
+            _sut.RentedBooks.Should().Contain(book);
         }
 
         [Fact]
@@ -51,13 +52,15 @@ namespace Library.RadenRovcanin.Contracts.Tests
 
             // assert
             book.Quantity.Should().Be(11);
+            bool conatains = _sut.RentedBooks.Contains(book);
+            conatains.Should().BeFalse();
         }
 
         [Fact]
         public void ReturnBook_WhenBookIsNotInRentedBooks_ThenThrowException()
         {
             // arrange
-            int bookId = 1;
+            const int bookId = 1;
 
             // act
             Action action = () => _sut.ReturnBook(bookId);

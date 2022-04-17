@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-using System.Text.RegularExpressions;
 using Library.RadenRovcanin.Contracts.Entities.Enumerate;
 using Library.RadenRovcanin.Contracts.Exceptions;
 
@@ -9,21 +7,17 @@ namespace Library.RadenRovcanin.Contracts.Entities
     {
         public int Id { get; } = default!;
 
-        [Required(ErrorMessage = "Title is required")]
         public string Title { get; } = default!;
 
-        [Required(ErrorMessage = "Genre is required")]
         public Genre Genre { get; } = default!;
 
-        [Required(ErrorMessage = "Authors are required")]
         public string Authors { get; } = default!;
 
-        [Required(ErrorMessage = "Quantity is required")]
         public int Quantity { get; private set; } = default!;
 
         public List<Person> People { get; } = default!;
 
-        public Book()
+        private Book()
         {
         }
 
@@ -38,12 +32,12 @@ namespace Library.RadenRovcanin.Contracts.Entities
                 throw new ArgumentException("Quantity must be greater than 0");
             }
 
-            if (String.IsNullOrWhiteSpace(title) || String.IsNullOrEmpty(title))
+            if (string.IsNullOrWhiteSpace(title) || string.IsNullOrEmpty(title))
             {
                 throw new ArgumentException("Title is required");
             }
 
-            if (String.IsNullOrWhiteSpace(authors) || String.IsNullOrEmpty(authors))
+            if (string.IsNullOrWhiteSpace(authors) || string.IsNullOrEmpty(authors))
             {
                 throw new ArgumentException("Authors are required");
             }
@@ -52,7 +46,6 @@ namespace Library.RadenRovcanin.Contracts.Entities
             Genre = genre;
             Authors = authors;
             Quantity = quantity;
-            
         }
 
         public Book(

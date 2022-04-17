@@ -9,14 +9,6 @@ namespace Library.RadenRovcanin.Contracts.Tests.Entities
 {
     public class BookTests
     {
-
-        private readonly Book _sut;
-
-        public BookTests()
-        {
-            _sut = new Book();
-        }
-
         [Fact]
         public void ConstructorBook_WhenParamsAreValid_ThenSuccessfully()
         {

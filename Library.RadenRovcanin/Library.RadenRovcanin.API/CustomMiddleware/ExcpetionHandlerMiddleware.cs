@@ -17,7 +17,6 @@ namespace Library.RadenRovcanin.API.CustomMiddleware
 
         public async Task Invoke(HttpContext httpContext)
         {
-
             try
             {
                 await _next(httpContext);

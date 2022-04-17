@@ -120,7 +120,6 @@ namespace Library.RadenRovcanin.Services.Tests
 
             // assert
             actualResult.Should().BeEmpty();
-
         }
 
         [Fact]
