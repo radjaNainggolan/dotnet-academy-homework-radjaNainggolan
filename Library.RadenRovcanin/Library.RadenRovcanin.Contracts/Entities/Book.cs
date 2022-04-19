@@ -17,12 +17,45 @@ namespace Library.RadenRovcanin.Contracts.Entities
 
         public List<Person> People { get; } = default!;
 
+        private Book()
+        {
+        }
+
         public Book(
             string title,
             Genre genre,
             string authors,
             int quantity)
         {
+            if (quantity <= 0)
+            {
+                throw new ArgumentException("Quantity must be greater than 0");
+            }
+
+            if (string.IsNullOrWhiteSpace(title) || string.IsNullOrEmpty(title))
+            {
+                throw new ArgumentException("Title is required");
+            }
+
+            if (string.IsNullOrWhiteSpace(authors) || string.IsNullOrEmpty(authors))
+            {
+                throw new ArgumentException("Authors are required");
+            }
+
+            Title = title;
+            Genre = genre;
+            Authors = authors;
+            Quantity = quantity;
+        }
+
+        public Book(
+            int id,
+            string title,
+            Genre genre,
+            string authors,
+            int quantity)
+        {
+            Id = id;
             Title = title;
             Genre = genre;
             Authors = authors;

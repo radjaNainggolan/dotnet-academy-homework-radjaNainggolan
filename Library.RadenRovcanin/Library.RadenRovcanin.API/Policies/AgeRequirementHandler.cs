@@ -11,7 +11,7 @@ namespace Library.RadenRovcanin.API.Policies
                 return Task.CompletedTask;
             }
 
-            int actualAge = int.Parse(context.User.FindFirst(claim => claim.Type == "Age").Value);
+            int actualAge = int.Parse(s: context.User.FindFirst(claim => claim.Type == "Age").Value);
 
             if (actualAge >= requirement.Age)
             {

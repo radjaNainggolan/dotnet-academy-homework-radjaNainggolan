@@ -1,5 +1,5 @@
+using Library.RadenRovcanin.Contracts;
 using Library.RadenRovcanin.Contracts.Dtos;
-using Library.RadenRovcanin.Contracts.Entities.Enumerate;
 using Library.RadenRovcanin.Contracts.Repositories;
 using Library.RadenRovcanin.Contracts.Services;
 
@@ -21,7 +21,7 @@ namespace Library.RadenRovcanin.Services
                 .Select(b => new BookDto(
                 b.Id,
                 b.Title,
-                Enum.GetName(typeof(Genre), b.Genre),
+                b.Genre,
                 b.Authors,
                 b.Quantity));
             return books;
@@ -30,6 +30,11 @@ namespace Library.RadenRovcanin.Services
         public async Task RentBook(int personId, int bookId)
         {
             var book = await _iuow.Books.GetByIdAsync(bookId);
+
+            if (book == null)
+            {
+                throw new EntityNotFoundException($"Book with ID:{bookId} is not found in system.");
+            }
 
             var person = await _iuow.People.GetByIdWithBooksAsync(personId);
 
@@ -42,11 +47,16 @@ namespace Library.RadenRovcanin.Services
         {
             var person = await _iuow.People.GetByIdWithBooksAsync(personId);
 
+            if (person == null)
+            {
+                throw new EntityNotFoundException($"Person with ID:{personId} is not found in system.");
+            }
+
             var books = person.RentedBooks
                 .Select(b => new BookDto(
                     b.Id,
                     b.Title,
-                    Enum.GetName(typeof(Genre), b.Genre),
+                    b.Genre,
                     b.Authors,
                     b.Quantity));
 
@@ -56,6 +66,11 @@ namespace Library.RadenRovcanin.Services
         public async Task ReturnBook(int personId, int bookId)
         {
             var person = await _iuow.People.GetByIdWithBooksAsync(personId);
+
+            if (person == null)
+            {
+                throw new EntityNotFoundException($"Person with ID:{personId} is not found in system.");
+            }
 
             person.ReturnBook(bookId);
 
