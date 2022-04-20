@@ -54,11 +54,11 @@ namespace Library.RadenRovcanin.Services
 
             var books = person.RentedBooks
                 .Select(b => new BookDto(
-                    b.Id,
-                    b.Title,
-                    b.Genre,
-                    b.Authors,
-                    b.Quantity));
+                    b.Book.Id,
+                    b.Book.Title,
+                    b.Book.Genre,
+                    b.Book.Authors,
+                    b.Book.Quantity));
 
             return books;
         }

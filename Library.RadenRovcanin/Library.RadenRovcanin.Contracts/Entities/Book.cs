@@ -15,7 +15,7 @@ namespace Library.RadenRovcanin.Contracts.Entities
 
         public int Quantity { get; private set; } = default!;
 
-        public List<Person> People { get; } = default!;
+        public List<PersonBook> PersonBooks { get; } = default!;
 
         private Book()
         {

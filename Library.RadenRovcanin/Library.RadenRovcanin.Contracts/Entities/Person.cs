@@ -13,7 +13,7 @@ namespace Library.RadenRovcanin.Contracts.Entities
 
         public Address Address { get; } = default!;
 
-        public List<Book> RentedBooks { get; set; } = default!;
+        public List<PersonBook> RentedBooks { get; set; } = default!;
 
         public Person(string firstName, string lastName, string email, string userName, int age, Address address)
         {
@@ -34,17 +34,19 @@ namespace Library.RadenRovcanin.Contracts.Entities
             Email = email;
             Age = age;
             Address = address;
-            RentedBooks = new List<Book>();
+            RentedBooks = new List<PersonBook>();
         }
 
         public Person()
         {
-            RentedBooks = new List<Book>();
+            RentedBooks = new List<PersonBook>();
         }
 
         public void RentBook(Book book)
         {
             const int maxNumbersOfBooks = 4;
+
+            PersonBook personBook = new PersonBook(this, book);
 
             if (RentedBooks.Count >= maxNumbersOfBooks)
             {
@@ -54,7 +56,7 @@ namespace Library.RadenRovcanin.Contracts.Entities
             {
                 throw new EntityNotFoundException();
             }
-            else if (RentedBooks.Contains(book))
+            else if (RentedBooks.Contains(personBook))
             {
                 throw new BookRentingException("Book already rented");
             }
@@ -64,21 +66,21 @@ namespace Library.RadenRovcanin.Contracts.Entities
             }
             else
             {
-                RentedBooks.Add(book);
+                RentedBooks.Add(personBook);
                 book.RemoveFromShelf();
             }
         }
 
         public void ReturnBook(int bookId)
         {
-            var book = RentedBooks.Find(b => b.Id == bookId);
+            var book = RentedBooks.Find(b => b.BookId == bookId);
             if (book == null)
             {
                 throw new EntityNotFoundException("Book can not be found in person rented books");
             }
 
             RentedBooks.Remove(book);
-            book.AddToShelf();
+            book.Book.AddToShelf();
         }
     }
 }
