@@ -4,6 +4,7 @@ using Library.RadenRovcanin.Contracts.Dtos;
 using Library.RadenRovcanin.Contracts.Entities;
 using Library.RadenRovcanin.Contracts.Repositories;
 using Library.RadenRovcanin.Contracts.Services;
+using Library.RadenRovcanin.Contracts.Settings;
 using Library.RadenRovcanin.Data.Db.Repositories;
 using Library.RadenRovcanin.Services;
 using Library.RadneRovcanin.Data.Db.Configurations;
@@ -33,14 +34,13 @@ namespace Library.RadenRovcanin.API
         public static void ConfigureServicesDependencies(IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<JWTSettings>(configuration.GetSection("JWT"));
-
+           
             services.AddScoped<UserManager<Person>>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<ITokenGenerator, TokenGenerator>();
             services.AddScoped<IRegistrationService, RegistrationService>();
             services.AddScoped<IAuthorizationHandler, AgeRequirementHandler>();
             services.AddScoped<ILibraryService, LibraryService>();
-            
         }
 
         public static void ConfigureIdentityDependencies(IServiceCollection services, IConfiguration configuration)
