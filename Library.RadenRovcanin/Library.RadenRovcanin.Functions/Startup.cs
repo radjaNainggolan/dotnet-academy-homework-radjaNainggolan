@@ -16,10 +16,6 @@ namespace Library.RadenRovcanin.Functions
     {
         public override void Configure(IFunctionsHostBuilder builder)
         {
-            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-            builder.Services.AddScoped<IEmailService, EmailService>();
-            builder.Services.AddScoped<ILibraryNotificationService, LibraryNotificationService>();
-
             var p = builder.GetContext().Configuration;
             builder.Services.Configure<EmailSettings>(p.GetSection("EmailSettings"));
             var connectionString = p.GetConnectionString("LibraryDB");
@@ -28,6 +24,9 @@ namespace Library.RadenRovcanin.Functions
             {
                 opt.UseSqlServer(connectionString);
             });
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped<IEmailService, EmailService>();
+            builder.Services.AddScoped<ILibraryNotificationService, LibraryNotificationService>();
         }
     }
 }
