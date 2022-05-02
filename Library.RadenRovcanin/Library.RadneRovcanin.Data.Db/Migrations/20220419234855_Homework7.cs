@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Library.RadenRovcanin.Data.Db.Migrations
 {
-    public partial class PeronandBooksandAddressandIdentityUser : Migration
+    public partial class Homework7 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -199,12 +199,13 @@ namespace Library.RadenRovcanin.Data.Db.Migrations
                 name: "PersonBook",
                 columns: table => new
                 {
-                    BookdId = table.Column<int>(type: "int", nullable: false),
-                    PersonId = table.Column<int>(type: "int", nullable: false)
+                    PersonId = table.Column<int>(type: "int", nullable: false),
+                    BookId = table.Column<int>(type: "int", nullable: false),
+                    DateRented = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PersonBook", x => new { x.BookdId, x.PersonId });
+                    table.PrimaryKey("PK_PersonBook", x => new { x.BookId, x.PersonId });
                     table.ForeignKey(
                         name: "FK_PersonBook_AspNetUsers_PersonId",
                         column: x => x.PersonId,
@@ -212,8 +213,8 @@ namespace Library.RadenRovcanin.Data.Db.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PersonBook_Books_BookdId",
-                        column: x => x.BookdId,
+                        name: "FK_PersonBook_Books_BookId",
+                        column: x => x.BookId,
                         principalTable: "Books",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);

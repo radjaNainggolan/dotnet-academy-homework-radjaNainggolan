@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AzureFunctionsVersion>v4</AzureFunctionsVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.6.0" />
+    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.SendGrid" Version="3.0.2" />
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.0.1" />
+    <PackageReference Include="RimDev.Automation.StorageEmulator" Version="0.3.1" />
+    <PackageReference Include="SFA.DAS.Testing.AzureStorageEmulator" Version="3.0.169" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Library.RadenRovcanin.Contracts\Library.RadenRovcanin.Contracts.csproj" />
+    <ProjectReference Include="..\Library.RadenRovcanin.Services\Library.RadenRovcanin.Services.csproj" />
+    <ProjectReference Include="..\Library.RadneRovcanin.Data.Db\Library.RadenRovcanin.Data.Db.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="host.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="local.settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+</Project>

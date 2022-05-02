@@ -37,8 +37,15 @@ namespace Library.RadenRovcanin.Data.Db.Repositories
         {
             IQueryable<Person> query = _dbSet
                 .Where(p => p.Id == id)
-                .Include(b => b.RentedBooks);
+                .Include(b => b.RentedBooks)
+                .ThenInclude(b => b.Book);
             return await query.FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<Person>> GetPeopleWithBookRentedBeforeDate(DateTime date)
+        {
+            IQueryable<Person> query = _dbSet.Include(p => p.RentedBooks.Where(b => b.DateRented < date));
+            return await query.ToListAsync();
         }
     }
 }

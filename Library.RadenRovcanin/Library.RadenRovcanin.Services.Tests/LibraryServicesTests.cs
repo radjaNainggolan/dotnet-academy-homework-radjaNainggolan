@@ -86,7 +86,8 @@ namespace Library.RadenRovcanin.Services.Tests
             var book = BookMock.Build();
             var person = PersonMock.Build();
             var personId = person.Id;
-            person.RentedBooks.Add(book);
+            PersonBook personBook = new PersonBook(person, book);
+            person.RentedBooks.Add(personBook);
 
             _unitOfWorkMock.Setup(m => m.People.GetByIdWithBooksAsync(personId)).ReturnsAsync(person);
 
@@ -145,7 +146,8 @@ namespace Library.RadenRovcanin.Services.Tests
             var book = BookMock.Build();
             var bookId = book.Id;
             var person = PersonMock.Build();
-            person.RentedBooks.Add(book);
+            PersonBook personBook = new PersonBook(person, book);
+            person.RentedBooks.Add(personBook);
             var personId = person.Id;
 
             _unitOfWorkMock.Setup(m => m.Books.GetByIdAsync(bookId)).ReturnsAsync(book);
